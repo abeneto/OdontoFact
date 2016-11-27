@@ -81,5 +81,6 @@
     <string name="diciembre">Diciembre</string>
     <string name="insertar_gastos_lab">Insertar gastos de laboratorio</string>
     <string name="error_gastos_ya_existen">El mes y el año seleccionados ya estan incluidos en base de datos</string>
+    <string name="action_delete">Eliminar</string>
 
 </resources>

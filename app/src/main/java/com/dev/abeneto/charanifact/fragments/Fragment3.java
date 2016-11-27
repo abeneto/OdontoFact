@@ -9,14 +9,18 @@ import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.dev.abeneto.charanifact.R;
+import com.dev.abeneto.charanifact.activities.MainActivity;
 import com.dev.abeneto.charanifact.adapter.LineaFacturaAdapter;
+import com.dev.abeneto.charanifact.custom_elements.CheckedLinearLayout;
 import com.dev.abeneto.charanifact.db.DatabaseHelper;
 import com.dev.abeneto.charanifact.pojo.GastosLaboratori;
 import com.dev.abeneto.charanifact.pojo.LineaFactura;
@@ -44,6 +48,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -54,6 +59,8 @@ public class Fragment3 extends Fragment {
     View inflated = null;
     DatabaseHelper dbHelper = null;
     ArrayList<LineaFactura> lineasDeFactura = null;
+    Menu miMenu = null;
+
 
     public Fragment3() {
         // Required empty public constructor
@@ -65,6 +72,11 @@ public class Fragment3 extends Fragment {
         // Inflate the layout for this fragment
         inflated = inflater.inflate(R.layout.fragment_fragment3, container, false);
         dbHelper = new DatabaseHelper(getActivity().getApplicationContext());
+
+        MainActivity activity = (MainActivity) getActivity();
+        this.miMenu = activity.getMiMenu();
+
+        miMenu.findItem(R.id.delete).setVisible(true);
 
         lineasDeFactura = null;
         try {
@@ -90,6 +102,8 @@ public class Fragment3 extends Fragment {
         // Attach the adapter to a ListView
         ListView listView = (ListView) inflated.findViewById(R.id.listaLineasFactura);
         listView.setAdapter(adapter);
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
 
         Button botonExcel = (Button) inflated.findViewById(R.id.botonGenerarFacturaExcel);
         Button botonPdf = (Button) inflated.findViewById(R.id.botonGenerarFacturaPdf);
@@ -131,7 +145,7 @@ public class Fragment3 extends Fragment {
 
         Row filaTitulo = sheet.getRow(0);
         Cell celdaTitulo = filaTitulo.createCell(0);
-        celdaTitulo.setCellValue("Facturación de "+getMonthForInt(mes-1)+" de "+anyo +"");
+        celdaTitulo.setCellValue("Facturación de " + getMonthForInt(mes - 1) + " de " + anyo + "");
         celdaTitulo.getCellStyle().setAlignment(HorizontalAlignment.CENTER);
 
         int rownum = 2;
@@ -165,17 +179,17 @@ public class Fragment3 extends Fragment {
         }
 
         Map<String, Object> fieldsGastos = new HashMap<>();
-        fieldsGastos.put("mes",mes);
-        fieldsGastos.put("any",anyo);
+        fieldsGastos.put("mes", mes);
+        fieldsGastos.put("any", anyo);
 
         GastosLaboratori gastosLaboratori;
 
         try {
             gastosLaboratori = dbHelper.getGastosByFields(fieldsGastos);
 
-            if(gastosLaboratori != null) {
+            if (gastosLaboratori != null) {
 
-                rownum+=2;
+                rownum += 2;
 
                 Row row = sheet.createRow(rownum++);
                 int cellnum = 0;
@@ -319,7 +333,7 @@ public class Fragment3 extends Fragment {
         String month = "wrong";
         DateFormatSymbols dfs = new DateFormatSymbols();
         String[] months = dfs.getMonths();
-        if (num >= 0 && num <= 11 ) {
+        if (num >= 0 && num <= 11) {
             month = months[num];
         }
         return month;

@@ -27,6 +27,7 @@ public class MainActivity extends ActionBarActivity {
     private DrawerLayout drawerLayout;
     private Usuari usuariLogat;
     private DatabaseHelper dbHelper;
+    private Menu miMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,8 @@ public class MainActivity extends ActionBarActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         NavigationView navView = (NavigationView)findViewById(R.id.navview);
+
+
 
         navView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -110,7 +113,10 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        this.miMenu = menu;
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        miMenu.findItem(R.id.delete).setVisible(false);
         return true;
     }
 
@@ -136,5 +142,13 @@ public class MainActivity extends ActionBarActivity {
 
     public void setUsuariLogat(Usuari usuariLogat) {
         this.usuariLogat = usuariLogat;
+    }
+
+    public Menu getMiMenu() {
+        return miMenu;
+    }
+
+    public void setMiMenu(Menu miMenu) {
+        this.miMenu = miMenu;
     }
 }
