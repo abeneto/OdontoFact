@@ -1,0 +1,37 @@
+package com.dev.abeneto.charanifact.enums;
+
+/**
+ * Created by Alberto on 13/09/2016.
+ */
+public enum TipoTractamentEnum {
+
+    ORTODONCIA("ORTODONCIA",0.35),
+    RECONSTRUCCIO("RECONSTRUCCIO", 0.25),
+    CURETATGE("CURETATGE", 0.25),
+    PROTESIS("PROTESIS", 0.25),
+    ENDODONCIA("ENDODONCIA", 0.25);
+
+    private String codi;
+    private Double percentatge;
+
+    TipoTractamentEnum(String codi, Double percentatge) {
+        this.codi = codi;
+        this.percentatge = percentatge;
+    }
+
+    public String getCodi() {
+        return codi;
+    }
+
+    public void setCodi(String codi) {
+        this.codi = codi;
+    }
+
+    public Double getPercentatge() {
+        return percentatge;
+    }
+
+    public void setPercentatge(Double percentatge) {
+        this.percentatge = percentatge;
+    }
+}

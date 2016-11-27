@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/layout3_fragment2"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/textView3"
+                android:text="@string/clinica_label"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/desplegableCliniques"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_toRightOf="@+id/textView"
+                android:background="@drawable/desplegables" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/layout3_fragment2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/textView8"
+                android:text="@string/fecha_label"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:ems="10"
+                android:id="@+id/editTextFecha"
+                android:background="@drawable/desplegables"
+                android:focusable="false"
+                android:textSize="12dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/layout1_fragment2"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/linearLayout">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/textView"
+                android:text="@string/paciente_label"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/desplegablePacients"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_toRightOf="@+id/textView"
+                android:background="@drawable/desplegables" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout1_fragment2"
+            android:id="@+id/layout2_fragment2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/textView2"
+                android:text="@string/tratamiento_label"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/desplegableTratmiento"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_toRightOf="@+id/textView"
+                android:background="@drawable/desplegables" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout2_fragment2"
+            android:id="@+id/linearLayoutImport">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/textView4"
+                android:text="@string/importe_label"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="6dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:inputType="numberDecimal"
+                    android:id="@+id/importeEditText"
+                    android:layout_weight="1"
+                    android:background="@drawable/desplegables"
+                    android:textSize="13dp"
+                    android:paddingTop="5dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/label_euros"
+                    android:id="@+id/textView5"
+                    android:layout_alignParentEnd="false"
+                    android:layout_toRightOf="@+id/importeEditText"
+                    android:layout_alignParentRight="false"
+                    android:textAlignment="center"
+                    android:paddingTop="10dp"
+                    android:layout_weight="8" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearLayoutImport"
+            android:id="@+id/linearLayoutTipoPago" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/textView6"
+                android:text="@string/tipo_pago_label"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/desplegableTipoPago"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_toRightOf="@+id/textView"
+                android:background="@drawable/desplegables" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearLayoutTipoPago"
+            android:id="@+id/linearLayoutObservacions" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/textView7"
+                android:text="@string/observaciones_label"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:ems="10"
+                android:id="@+id/observacionesInput"
+                android:background="@drawable/desplegables" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearLayoutObservacions"
+            android:id="@+id/linearLayoutBotonAfegir"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/anyadir_linea_pago"
+                android:id="@+id/botonAnyadir"
+                android:layout_gravity="center"
+                android:background="@drawable/botones"
+                android:layout_marginTop="10dp"
+                android:textColor="@android:color/white"
+                android:layout_marginRight="15dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/limpiar_formulario"
+                android:id="@+id/botonResetForm"
+                android:layout_gravity="center"
+                android:background="@drawable/botones_grises"
+                android:layout_marginTop="10dp"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</ScrollView>
+
+</FrameLayout>

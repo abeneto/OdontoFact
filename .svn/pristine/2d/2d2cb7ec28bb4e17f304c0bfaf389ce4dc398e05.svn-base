@@ -1,0 +1,97 @@
+package com.dev.abeneto.charanifact.fragments;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.text.Layout;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.dev.abeneto.charanifact.R;
+import com.dev.abeneto.charanifact.db.DatabaseHelper;
+import com.dev.abeneto.charanifact.pojo.Pacient;
+
+import java.sql.SQLException;
+
+/**
+ * Created by Alberto on 11/09/2016.
+ */
+public class Fragment1 extends Fragment {
+
+    DatabaseHelper dbHelper = null;
+    View inflated = null;
+
+    public Fragment1() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        inflated = inflater.inflate(R.layout.fragment_fragment1, container, false);
+
+        // Inflate the layout for this fragment
+        inflated.findViewById(R.id.botonAltaPaciente).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkAltaPacienteParams(view)) {
+                    dbHelper = new DatabaseHelper(getActivity().getApplicationContext());
+
+                    Pacient pacient = new Pacient();
+                    pacient.setNom(((EditText) inflated.findViewById(R.id.nomInput)).getText().toString());
+                    pacient.setCognom1(((EditText) inflated.findViewById(R.id.apellido1Input)).getText().toString());
+                    pacient.setCognom2(((EditText) inflated.findViewById(R.id.apellido2Input)).getText().toString());
+                    pacient.setNumeroHistoria(((EditText) inflated.findViewById(R.id.numHistoriaInput)).getText().toString());
+
+                    try {
+                        dbHelper.getPacientDao().create(pacient);
+                        Log.i("Paciente creado", "Paciente CREADO: " + pacient.getNom());
+                        Toast toast =  Toast.makeText(inflated.getContext(), "Paciente " + pacient.getNom() + " " + pacient.getCognom1()+" añadido correctamente.", Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER,0,30);
+                        toast.show();
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        });
+
+        return inflated;
+
+    }
+
+    private Boolean checkAltaPacienteParams(View view) {
+        Boolean cancel = false;
+        View focusView = null;
+
+        if (inflated.findViewById(R.id.nomInput) == null || ((EditText) inflated.findViewById(R.id.nomInput)).getText().toString().equals("")) {
+            ((EditText) inflated.findViewById(R.id.nomInput)).setError(getString(R.string.error_campo_obligatorio));
+            cancel = true;
+            focusView = (EditText) inflated.findViewById(R.id.nomInput);
+        } else if (inflated.findViewById(R.id.apellido1Input) == null && ((EditText) inflated.findViewById(R.id.apellido1Input)).getText().toString().equals("")) {
+            ((EditText) inflated.findViewById(R.id.apellido1Input)).setError(getString(R.string.error_campo_obligatorio));
+            cancel = true;
+            focusView = (EditText) inflated.findViewById(R.id.apellido1Input);
+        } else if (inflated.findViewById(R.id.numHistoriaInput) == null && ((EditText) inflated.findViewById(R.id.numHistoriaInput)).getText().toString().equals("")) {
+            ((EditText) inflated.findViewById(R.id.numHistoriaInput)).setError(getString(R.string.error_campo_obligatorio));
+            cancel = true;
+            focusView = (EditText) inflated.findViewById(R.id.numHistoriaInput);
+        }
+
+        if (cancel) {
+            focusView.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+
+}

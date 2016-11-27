@@ -1,0 +1,26 @@
+package com.dev.abeneto.charanifact.enums;
+
+/**
+ * Created by Alberto on 13/09/2016.
+ */
+public enum TipusPagament {
+
+    EFECTIU("E"),
+    TARGETA("T"),
+    TRANSFERENCIA("TF"),
+    FINANSAMENT("FF");
+
+    private String codi;
+
+    TipusPagament(String codi) {
+        this.codi = codi;
+    }
+
+    public String getCodi() {
+        return codi;
+    }
+
+    public void setCodi(String codi) {
+        this.codi = codi;
+    }
+}

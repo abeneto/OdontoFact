@@ -1,0 +1,75 @@
+package com.dev.abeneto.charanifact.pojo;
+
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+import java.util.List;
+
+/**
+ * Created by Alberto on 13/09/2016.
+ */
+@DatabaseTable(tableName = "paciente")
+public class Pacient {
+
+    @DatabaseField(generatedId = true)
+    private Long id;
+
+    @DatabaseField
+    private String nom;
+
+    @DatabaseField
+    private String cognom1;
+
+    @DatabaseField
+    private String cognom2;
+
+    @DatabaseField
+    private String numeroHistoria;
+
+    private List<Tractament> tractaments;
+
+
+    public Pacient() {
+        super();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getCognom1() {
+        return cognom1;
+    }
+
+    public void setCognom1(String cognom1) {
+        this.cognom1 = cognom1;
+    }
+
+    public String getCognom2() {
+        return cognom2;
+    }
+
+    public void setCognom2(String cognom2) {
+        this.cognom2 = cognom2;
+    }
+
+    public String getNumeroHistoria() {
+        return numeroHistoria;
+    }
+
+    public void setNumeroHistoria(String numeroHistoria) {
+        this.numeroHistoria = numeroHistoria;
+    }
+}

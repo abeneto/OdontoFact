@@ -1,0 +1,68 @@
+package com.dev.abeneto.charanifact.fragments;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
+import com.dev.abeneto.charanifact.R;
+import com.dev.abeneto.charanifact.db.DatabaseHelper;
+import com.dev.abeneto.charanifact.pojo.Pacient;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by Alberto on 11/09/2016.
+ */
+public class Fragment2 extends Fragment {
+
+    View inflated = null;
+    DatabaseHelper dbHelper = null;
+
+    public Fragment2() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        inflated = inflater.inflate(R.layout.fragment_fragment2, container, false);
+        dbHelper = new DatabaseHelper(getActivity().getApplicationContext());
+
+        Spinner desplegablePacients = (Spinner)inflated.findViewById(R.id.desplegablePacients);
+
+        ArrayAdapter<String> adapter;
+
+        List<Pacient> pacients = null;
+        List<String> nomsPacients = null;
+
+        try {
+            pacients = dbHelper.getPacientDao().queryForAll();
+            if(pacients!= null){
+                nomsPacients = new ArrayList<String>();
+                for (Pacient p:pacients) {
+                    nomsPacients.add(p.getNom() + " "+ p.getCognom1());
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if(pacients != null) {
+
+            adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
+                    android.R.layout.simple_spinner_item, nomsPacients);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            desplegablePacients.setAdapter(adapter);
+
+        }
+
+        return inflated;
+    }
+}

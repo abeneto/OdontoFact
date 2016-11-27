@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/nomInput"
+            android:layout_gravity="center_horizontal"
+            android:hint="@string/nombre"
+            android:background="@drawable/desplegables" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/apellido1Input"
+            android:layout_gravity="center_horizontal"
+            android:hint="@string/apellido1"
+            android:background="@drawable/desplegables"
+            android:layout_marginTop="15dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/apellido2Input"
+            android:layout_gravity="center_horizontal"
+            android:hint="@string/apellido2"
+            android:background="@drawable/desplegables"
+            android:layout_marginTop="15dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/numHistoriaInput"
+            android:layout_gravity="center_horizontal"
+            android:hint="@string/numero_historia"
+            android:background="@drawable/desplegables"
+            android:layout_marginTop="15dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nuevo_paciente"
+            android:id="@+id/botonAltaPaciente"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/botones"
+            android:layout_marginTop="15dp"
+            android:padding="10dp"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+</FrameLayout>

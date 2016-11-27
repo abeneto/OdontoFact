@@ -1,0 +1,211 @@
+package com.dev.abeneto.charanifact.fragments;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.dev.abeneto.charanifact.R;
+import com.dev.abeneto.charanifact.db.DatabaseHelper;
+import com.dev.abeneto.charanifact.enums.ClinicaEnum;
+import com.dev.abeneto.charanifact.enums.TipoTractamentEnum;
+import com.dev.abeneto.charanifact.enums.TipusPagament;
+import com.dev.abeneto.charanifact.pojo.LineaFactura;
+import com.dev.abeneto.charanifact.pojo.Pacient;
+import com.dev.abeneto.charanifact.pojo.Tractament;
+
+import java.math.BigDecimal;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * Created by Alberto on 11/09/2016.
+ */
+public class Fragment2 extends Fragment {
+
+    View inflated = null;
+    DatabaseHelper dbHelper = null;
+
+    Button botonAnyadir = null;
+    Spinner desplegablePacients = null;
+    Spinner desplegableCliniques = null;
+    Spinner desplegableTipoPago = null;
+    Spinner desplegableTratamiento = null;
+    EditText campoFecha = null;
+
+    List<Pacient> pacients = null;
+    List<String> nomsPacients = null;
+    ArrayAdapter<String> adapterPacients = null;
+
+    List<String> llistaCliniques = null;
+    ArrayAdapter<String> adapterCliniques = null;
+
+    List<String> llistaTipoPago = null;
+    ArrayAdapter<String> adapterTipoPago = null;
+
+    List<String> llistaTratamientos = null;
+    ArrayAdapter<String> adapterTratamientos = null;
+
+    public Fragment2() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        inflated = inflater.inflate(R.layout.fragment_fragment2, container, false);
+        dbHelper = new DatabaseHelper(getActivity().getApplicationContext());
+
+        botonAnyadir = (Button) inflated.findViewById(R.id.botonAnyadir);
+
+        this.setListenerBotonAnyadir();
+
+        desplegablePacients = (Spinner) inflated.findViewById(R.id.desplegablePacients);
+        desplegableCliniques = (Spinner) inflated.findViewById(R.id.desplegableCliniques);
+        desplegableTipoPago = (Spinner) inflated.findViewById(R.id.desplegableTipoPago);
+        desplegableTratamiento = (Spinner) inflated.findViewById(R.id.desplegableTratmiento);
+        campoFecha = (EditText) inflated.findViewById(R.id.editTextFecha);
+
+        Date hoy = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        campoFecha.setText(sdf.format(hoy));
+
+        this.loadPacients(desplegablePacients);
+        this.loadCliniques(desplegableCliniques);
+        this.loadTipoPago(desplegableTipoPago);
+        this.loadTratamiento(desplegableTratamiento);
+
+        return inflated;
+    }
+
+    private void setListenerBotonAnyadir() {
+        this.botonAnyadir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                LineaFactura lineaFactura = new LineaFactura();
+
+                String pacientSelected = (String) desplegablePacients.getSelectedItem();
+                String clinicaSelected = (String) desplegableCliniques.getSelectedItem();
+                String tipoPagoSelected = (String) desplegableTipoPago.getSelectedItem();
+                String tratamiento = (String) desplegableTratamiento.getSelectedItem();
+                String importeEditText = ((EditText) inflated.findViewById(R.id.importeEditText)).getText().toString();
+                String observacionesInput = ((EditText) inflated.findViewById(R.id.observacionesInput)).getText().toString();
+                String fecha = campoFecha.getText().toString();
+
+                Pacient pacient = null;
+                TipusPagament tipusPagament = null;
+                Tractament tractament = null;
+
+
+                for (Pacient pacInsert : pacients) {
+                    if (pacientSelected.contains(pacInsert.getCognom1()) && pacientSelected.contains(pacInsert.getCognom2())) {
+                        pacient = pacInsert;
+                        break;
+                    }
+                }
+
+                //TODO: obtenir els tractaments del pacient de bbdd, si es el mateix obtenirlo i afegirli linea factura, sino crear uno nou
+                Tractament tratamentPacient = new Tractament();
+                if (tratamentPacient.getLiniesFactura() == null) {
+                    tratamentPacient.setLiniesFactura(new ArrayList<LineaFactura>());
+                }
+
+                tratamentPacient.getLiniesFactura().add(lineaFactura);
+                tratamentPacient.setTipoTractamentEnum(TipoTractamentEnum.valueOf(tratamiento));
+
+                /*ClinicaEnum.valueOf(clinicaSelected);
+                lineaFactura.setClinica(ClinicaEnum.valueOf(clinicaSelected));
+                lineaFactura.setFecha(new Date(fecha));
+                lineaFactura.setImporte(new BigDecimal(importeEditText));
+                lineaFactura.setObservaciones(observacionesInput);
+                lineaFactura.setPacient(pacient);
+                lineaFactura.setTipusPagament(TipusPagament.valueOf(tipoPagoSelected));
+                lineaFactura.setTractament(tractament);*/
+
+                Toast toast = Toast.makeText(inflated.getContext(), "Se ha insertado la linea de factura correctamente", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 30);
+                toast.show();
+
+            }
+        });
+    }
+
+    private void loadPacients(Spinner desplegablePacients) {
+        try {
+            pacients = dbHelper.getPacientDao().queryForAll();
+            if (pacients != null) {
+                nomsPacients = new ArrayList<String>();
+                for (Pacient p : pacients) {
+                    nomsPacients.add(p.getNom() + " " + p.getCognom1());
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (pacients != null) {
+
+            adapterPacients = new ArrayAdapter<String>(getActivity().getApplicationContext(),
+                    R.layout.spinner_item, nomsPacients);
+            adapterPacients.setDropDownViewResource(R.layout.spinner_dropdown_item);
+            desplegablePacients.setAdapter(adapterPacients);
+
+        }
+    }
+
+    private void loadCliniques(Spinner desplegableCliniques) {
+        llistaCliniques = new ArrayList<>();
+        llistaCliniques.add(ClinicaEnum.CLINICA_UNO.getNom());
+        llistaCliniques.add(ClinicaEnum.CLINICA_DOS.getNom());
+        llistaCliniques.add(ClinicaEnum.CLINICA_TRES.getNom());
+
+        adapterCliniques = new ArrayAdapter<String>(getActivity().getApplicationContext(),
+                R.layout.spinner_item, llistaCliniques);
+
+        adapterCliniques.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        desplegableCliniques.setAdapter(adapterCliniques);
+
+    }
+
+    private void loadTipoPago(Spinner desplegableTipoPago) {
+        llistaTipoPago = new ArrayList<>();
+        llistaTipoPago.add(TipusPagament.EFECTIU.getLabel());
+        llistaTipoPago.add(TipusPagament.TARGETA.getLabel());
+        llistaTipoPago.add(TipusPagament.TRANSFERENCIA.getLabel());
+        llistaTipoPago.add(TipusPagament.FINANSAMENT.getLabel());
+
+        adapterTipoPago = new ArrayAdapter<String>(getActivity().getApplicationContext(),
+                R.layout.spinner_item, llistaTipoPago);
+
+        adapterTipoPago.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        desplegableTipoPago.setAdapter(adapterTipoPago);
+
+    }
+
+    private void loadTratamiento(Spinner desplegableTratamiento) {
+        llistaTratamientos = new ArrayList<>();
+        llistaTratamientos.add(TipoTractamentEnum.CURETATGE.getLabel());
+        llistaTratamientos.add(TipoTractamentEnum.ENDODONCIA.getLabel());
+        llistaTratamientos.add(TipoTractamentEnum.ORTODONCIA.getLabel());
+        llistaTratamientos.add(TipoTractamentEnum.PROTESIS.getLabel());
+        llistaTratamientos.add(TipoTractamentEnum.RECONSTRUCCIO.getLabel());
+
+        adapterTratamientos = new ArrayAdapter<String>(getActivity().getApplicationContext(),
+                R.layout.spinner_item, llistaTratamientos);
+
+        adapterTratamientos.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        desplegableTratamiento.setAdapter(adapterTratamientos);
+    }
+}

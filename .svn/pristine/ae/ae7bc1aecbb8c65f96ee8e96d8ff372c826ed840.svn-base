@@ -1,0 +1,50 @@
+package com.dev.abeneto.charanifact.pojo;
+
+import com.dev.abeneto.charanifact.enums.TipusPagament;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+import java.util.Date;
+
+/**
+ * Created by Alberto on 13/09/2016.
+ */
+@DatabaseTable(tableName = "linea_factura")
+public class LineaFactura {
+
+    @DatabaseField(generatedId = true)
+    private Long id;
+
+    @DatabaseField
+    private TipusPagament tipusPagament;
+
+    @DatabaseField
+    private Date fecha;
+
+    public LineaFactura() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public TipusPagament getTipusPagament() {
+        return tipusPagament;
+    }
+
+    public void setTipusPagament(TipusPagament tipusPagament) {
+        this.tipusPagament = tipusPagament;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+}

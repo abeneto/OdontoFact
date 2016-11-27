@@ -1,0 +1,24 @@
+package com.dev.abeneto.charanifact.pojo;
+
+import com.dev.abeneto.charanifact.enums.TipoTractamentEnum;
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+import java.util.List;
+
+/**
+ * Created by Alberto on 13/09/2016.
+ */
+@DatabaseTable(tableName = "tractament")
+public class Tractament {
+
+    @DatabaseField(generatedId = true)
+    private Long id;
+
+    @DatabaseField
+    private TipoTractamentEnum tipoTractamentEnum;
+
+    @DatabaseField
+    private List<LineaFactura> liniesFactura;
+}
