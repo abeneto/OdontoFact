@@ -82,5 +82,12 @@
     <string name="insertar_gastos_lab">Insertar gastos de laboratorio</string>
     <string name="error_gastos_ya_existen">El mes y el año seleccionados ya estan incluidos en base de datos</string>
     <string name="action_delete">Eliminar</string>
+    <string name="toast_message_lineas_factura_ninguna_seleccionada">Debe seleccionar alguna linea de factura para eliminar</string>
+    <string name="toast_message_lineas_factura_eliminadas">Se han eliminado las lineas de factura</string>
+    <string name="toast_message_lineas_factura_error">Se ha producido un error eliminando las lineas de factura</string>
+    <string name="excel_label_gastos_laboratorio">Gastos de Laboratorio</string>
+    <string name="excel_label_gastos_laboratorio_orto">Laboratorio de Ortodoncia</string>
+    <string name="excel_label_gastos_laboratorio_resi">Laboratorio Resitecnic</string>
+    <string name="excel_label_gastos_laboratorio_system">Laboratorio System</string>
 
 </resources>

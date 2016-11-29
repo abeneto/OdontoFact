@@ -37,14 +37,13 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        appbar = (Toolbar)findViewById(R.id.appbar);
+        appbar = (Toolbar) findViewById(R.id.appbar);
         setSupportActionBar(appbar);
 
         getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_launcher);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        NavigationView navView = (NavigationView)findViewById(R.id.navview);
-
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        NavigationView navView = (NavigationView) findViewById(R.id.navview);
 
 
         navView.setNavigationItemSelectedListener(
@@ -81,7 +80,7 @@ public class MainActivity extends ActionBarActivity {
                                 break;
                         }
 
-                        if(fragmentTransaction) {
+                        if (fragmentTransaction) {
                             getSupportFragmentManager().beginTransaction()
                                     .replace(R.id.content_frame, fragment)
                                     .commit();
@@ -101,10 +100,9 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-
     private void setElementosPantallaUsuario() {
-        TextView text = (TextView)findViewById(R.id.labelNombreUsuario);
-        if(this.usuariLogat != null && this.usuariLogat.getNombre() != null && this.usuariLogat.getApellido1()!= null) {
+        TextView text = (TextView) findViewById(R.id.labelNombreUsuario);
+        if (this.usuariLogat != null && this.usuariLogat.getNombre() != null && this.usuariLogat.getApellido1() != null) {
             String nombreMostrar = usuariLogat.getNombre() + " " + usuariLogat.getApellido1();
             text.setText(nombreMostrar);
         }
@@ -117,16 +115,22 @@ public class MainActivity extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
         miMenu.findItem(R.id.delete).setVisible(false);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * Listener para los botones del ActionBar
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
@@ -136,19 +140,8 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    public Usuari getUsuariLogat() {
-        return usuariLogat;
-    }
-
-    public void setUsuariLogat(Usuari usuariLogat) {
-        this.usuariLogat = usuariLogat;
-    }
-
     public Menu getMiMenu() {
         return miMenu;
     }
 
-    public void setMiMenu(Menu miMenu) {
-        this.miMenu = miMenu;
-    }
 }
