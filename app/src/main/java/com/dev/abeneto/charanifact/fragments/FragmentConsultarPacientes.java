@@ -7,13 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.dev.abeneto.charanifact.R;
+import com.dev.abeneto.charanifact.constants.FacturacioConstants;
 import com.dev.abeneto.charanifact.db.DatabaseHelper;
 import com.dev.abeneto.charanifact.pojo.Pacient;
 
@@ -27,33 +27,33 @@ import java.util.List;
  */
 public class FragmentConsultarPacientes extends Fragment {
 
-    View inflated = null;
-    DatabaseHelper dbHelper = null;
+    private View inflated = null;
+    private DatabaseHelper dbHelper = null;
     private EditText editTextApellido;
     private EditText editTextHistoria;
     private List<Pacient> listadoPacientes = new ArrayList<>();
-    ListView listView;
-    ArrayAdapter<Pacient> adapter;
+    private ListView listView;
+    private ArrayAdapter<Pacient> adapter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        inflated = inflater.inflate(R.layout.fragment_consultar_pacientes, container, false);
+        this.inflated = inflater.inflate(R.layout.fragment_consultar_pacientes, container, false);
 
-        dbHelper = new DatabaseHelper(getActivity().getApplicationContext());
+        this.dbHelper = new DatabaseHelper(getActivity().getApplicationContext());
 
-        Button botonBuscarPaciente = (Button) inflated.findViewById(R.id.botonBuscarPaciente);
-        editTextApellido = (EditText) inflated.findViewById(R.id.editTextApellido);
-        editTextHistoria = (EditText) inflated.findViewById(R.id.editTextHistoria);
+        Button botonBuscarPaciente = (Button) this.inflated.findViewById(R.id.botonBuscarPaciente);
+        this.editTextApellido = (EditText) this.inflated.findViewById(R.id.editTextApellido);
+        this.editTextHistoria = (EditText) this.inflated.findViewById(R.id.editTextHistoria);
 
-        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, listadoPacientes);
+        this.adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, listadoPacientes);
         // Attach the adapter to a ListView
-        listView = (ListView) inflated.findViewById(R.id.listViewPacientes);
-        listView.setAdapter(adapter);
+        this.listView = (ListView) this.inflated.findViewById(R.id.listViewPacientes);
+        this.listView.setAdapter(this.adapter);
 
         try {
-            listadoPacientes = dbHelper.getPacientesByFields(new HashMap<String, Object>());
-            adapter.notifyDataSetChanged();
+            this.listadoPacientes = this.dbHelper.getPacientesByFields(new HashMap<String, Object>());
+            this.adapter.notifyDataSetChanged();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -62,31 +62,50 @@ public class FragmentConsultarPacientes extends Fragment {
             @Override
             public void onClick(View view) {
 
-                HashMap<String, Object> fields = new HashMap<String, Object>();
-
-                if (editTextApellido.getText() != null && editTextApellido.getText().length() != 0  ) {
-                    fields.put("cognom1", editTextApellido.getText());
-                }
-
-                if (editTextHistoria.getText() != null && editTextHistoria.getText().length() != 0) {
-                    fields.put("numeroHistoria", editTextHistoria.getText());
-                }
-
-                try {
-                    listadoPacientes = dbHelper.getPacientesByFields(fields);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                listadoPacientes = buscarPacientes();
 
                 if (listadoPacientes == null || listadoPacientes.isEmpty()) {
-                    Toast.makeText(getActivity(), "No hay resultados", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getString(R.string.toast_message_no_hay_resultados), Toast.LENGTH_SHORT).show();
                 } else {
+                    adapter.clear();
+                    adapter.addAll(listadoPacientes);
+
+                    listView = (ListView) inflated.findViewById(R.id.listViewPacientes);
+                    listView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                 }
             }
         });
 
         return inflated;
+    }
+
+    /**
+     * Metodo para buscar pacientes.
+     *
+     * @return
+     */
+    private List<Pacient> buscarPacientes() {
+
+        List<Pacient> listaAuxPacientes = null;
+
+        HashMap<String, Object> fields = new HashMap<String, Object>();
+
+        if (editTextApellido.getText() != null && editTextApellido.getText().length() != 0) {
+            fields.put(FacturacioConstants.FIELD_PATIENT_COGNOM1, editTextApellido.getText());
+        }
+
+        if (editTextHistoria.getText() != null && editTextHistoria.getText().length() != 0) {
+            fields.put(FacturacioConstants.FIELD_PATIENT_NUMERO_HISTORIA, editTextHistoria.getText());
+        }
+
+        try {
+            listaAuxPacientes = dbHelper.getPacientesByFields(fields);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return listaAuxPacientes;
     }
 
 

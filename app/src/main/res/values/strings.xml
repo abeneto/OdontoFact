@@ -89,5 +89,6 @@
     <string name="excel_label_gastos_laboratorio_orto">Laboratorio de Ortodoncia</string>
     <string name="excel_label_gastos_laboratorio_resi">Laboratorio Resitecnic</string>
     <string name="excel_label_gastos_laboratorio_system">Laboratorio System</string>
+    <string name="toast_message_no_hay_resultados">No hay resultados</string>
 
 </resources>
