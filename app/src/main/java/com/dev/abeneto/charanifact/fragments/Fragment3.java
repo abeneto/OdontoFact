@@ -61,7 +61,7 @@ public class Fragment3 extends Fragment {
     private View inflated = null;
     private DatabaseHelper dbHelper = null;
     private ArrayList<LineaFactura> lineasDeFactura = null;
-    private Menu miMenu = null;
+    private static Menu miMenu = null;
     private ListView lineasFacturaListView;
     private LineaFacturaAdapter adapter;
 
@@ -141,6 +141,7 @@ public class Fragment3 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setRetainInstance(true);
         setHasOptionsMenu(true);
     }
 

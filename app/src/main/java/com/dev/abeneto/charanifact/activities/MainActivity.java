@@ -27,7 +27,7 @@ public class MainActivity extends ActionBarActivity {
     private DrawerLayout drawerLayout;
     private Usuari usuariLogat;
     private DatabaseHelper dbHelper;
-    private Menu miMenu;
+    private static Menu miMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +96,6 @@ public class MainActivity extends ActionBarActivity {
                 });
 
         this.setElementosPantallaUsuario();
-
     }
 
 

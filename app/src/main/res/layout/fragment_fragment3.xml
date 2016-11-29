@@ -1,108 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:configChanges="orientation|screenSize" android:id="@+id/fragment_3">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp">
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Fecha"
                 android:id="@+id/textView9"
-                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp" />
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text="Fecha"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Clínica"
                 android:id="@+id/textView12"
-                android:layout_weight="1"
-                android:layout_marginRight="5dp" />
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Paciente"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text="Clínica"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
                 android:id="@+id/textView10"
-                android:layout_weight="2"
-                android:layout_marginRight="5dp" />
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Tratamiento"
+                android:layout_marginRight="5dp"
+                android:layout_weight="2"
+                android:text="Paciente"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
                 android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
                 android:layout_weight="2"
-                android:layout_marginRight="5dp" />
+                android:text="Tratamiento"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Importe"
                 android:id="@+id/textView14"
-                android:layout_weight="1"
-                android:layout_marginRight="5dp" />
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Pago"
-                android:id="@+id/textView15"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:layout_marginRight="5dp" />
+                android:text="Importe"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text="Pago"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
 
         <ListView
+            android:id="@+id/listaLineasFactura"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/listaLineasFactura"
             android:layout_gravity="center"
             android:layout_weight="2" />
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/generar_factura_excel"
                 android:id="@+id/botonGenerarFacturaExcel"
-                android:background="@drawable/botones"
-                android:layout_weight="1"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp" />
-
-            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/generar_pdf"
-                android:id="@+id/botonGenerarFacturaPdf"
-                android:background="@drawable/botones"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="20dp"
                 android:layout_weight="1"
+                android:background="@drawable/botones"
+                android:text="@string/generar_factura_excel" />
+
+            <Button
+                android:id="@+id/botonGenerarFacturaPdf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp" />
+                android:layout_weight="1"
+                android:background="@drawable/botones"
+                android:text="@string/generar_pdf" />
         </LinearLayout>
     </LinearLayout>
 
