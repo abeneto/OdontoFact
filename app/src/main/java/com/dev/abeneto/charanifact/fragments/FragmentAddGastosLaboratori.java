@@ -205,7 +205,7 @@ public class FragmentAddGastosLaboratori extends Fragment {
 
 
         Map<String, Object> fieldsGastos = new HashMap<>();
-        fieldsGastos.put("mes", spinnerAnyo.getSelectedItem());
+        fieldsGastos.put("mes", getMesSelected((String) spinnerMes.getSelectedItem()));
         fieldsGastos.put("any", spinnerAnyo.getSelectedItem());
 
         if (dbHelper.getGastosByFields(fieldsGastos) != null) {

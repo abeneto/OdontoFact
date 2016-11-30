@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CharaniFact</string>
+    <string name="app_name">OdontoFact</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
 
@@ -90,5 +90,6 @@
     <string name="excel_label_gastos_laboratorio_resi">Laboratorio Resitecnic</string>
     <string name="excel_label_gastos_laboratorio_system">Laboratorio System</string>
     <string name="toast_message_no_hay_resultados">No hay resultados</string>
+    <string name="total_factura">Total factura</string>
 
 </resources>

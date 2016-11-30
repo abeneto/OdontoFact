@@ -263,7 +263,7 @@ public class Fragment3 extends Fragment {
         fieldsGastos.put("mes", mes);
         fieldsGastos.put("any", anyo);
 
-        GastosLaboratori gastosLaboratori;
+        GastosLaboratori gastosLaboratori = null;
 
         try {
             gastosLaboratori = dbHelper.getGastosByFields(fieldsGastos);
@@ -311,29 +311,46 @@ public class Fragment3 extends Fragment {
             e.printStackTrace();
         }
 
-        try {
+        if (gastosLaboratori != null) {
+            BigDecimal totalFactura = Utils.calcularTotalFactura(lineasDeFactura, gastosLaboratori);
 
-            String root = Environment.getExternalStorageDirectory().toString();
-            File myDir = new File(root + "/saved_facturas");
-            myDir.mkdirs();
+            rownum += 2;
 
-            String fileName = "FacturaOctubre.xls";
+            Row row = sheet.createRow(rownum++);
+            int cellnum = 0;
 
-            File file = new File(myDir, fileName);
+            cell = row.createCell(cellnum++);
+            cell.setCellValue(getString(R.string.total_factura));
 
-            FileOutputStream out = new FileOutputStream(file);
-            wb.write(out);
-            out.flush();
-            out.close();
+            cell = row.createCell(cellnum++);
+            cell.setCellValue(this.formatBigDecimal(totalFactura));
 
-            Toast.makeText(getActivity(), "Fichero excel generado correctamente", Toast.LENGTH_SHORT).show();
+            try {
 
-            this.viewExcel(Uri.fromFile(file));
+                String root = Environment.getExternalStorageDirectory().toString();
+                File myDir = new File(root + "/saved_facturas");
+                myDir.mkdirs();
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+                String fileName = "Factura_" + (mes - 1L) + "_" + anyo+"_"+ System.currentTimeMillis() + ".xls";
+
+                File file = new File(myDir, fileName);
+
+                FileOutputStream out = new FileOutputStream(file);
+                wb.write(out);
+                out.flush();
+                out.close();
+
+                Toast.makeText(getActivity(), "Fichero excel generado correctamente", Toast.LENGTH_SHORT).show();
+
+                this.viewExcel(Uri.fromFile(file));
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Toast.makeText(getActivity(), "No se han insertado los gastos de laboratorio del mes actual.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -374,5 +391,6 @@ public class Fragment3 extends Fragment {
 
         return result;
     }
+
 
 }

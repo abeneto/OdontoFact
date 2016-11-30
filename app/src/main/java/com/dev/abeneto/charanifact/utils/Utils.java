@@ -2,6 +2,7 @@ package com.dev.abeneto.charanifact.utils;
 
 import com.dev.abeneto.charanifact.enums.TipoTractamentEnum;
 import com.dev.abeneto.charanifact.enums.TipusPagament;
+import com.dev.abeneto.charanifact.pojo.GastosLaboratori;
 import com.dev.abeneto.charanifact.pojo.LineaFactura;
 
 import java.math.BigDecimal;
@@ -22,7 +23,7 @@ public class Utils {
      * @param lineasFacturas
      * @return
      */
-    public static BigDecimal calcularTotalFactura(ArrayList<LineaFactura> lineasFacturas) {
+    public static BigDecimal calcularTotalFactura(ArrayList<LineaFactura> lineasFacturas, GastosLaboratori gastosLaboratori) {
 
         BigDecimal totalFactura = new BigDecimal(0);
         BigDecimal provisionalOrto = new BigDecimal(0);
@@ -39,13 +40,22 @@ public class Utils {
             }
 
             if (lineaFactura.getTractament().getTipoTractamentEnum().getCodi().equals(TipoTractamentEnum.ORTODONCIA.getCodi())) {
-                provisionalOrto.add(importeProvisional);
+                provisionalOrto = provisionalOrto.add(importeProvisional);
             } else {
-                provisionalResta.add(importeProvisional);
+                provisionalResta = provisionalResta.add(importeProvisional);
             }
 
         }
 
+        provisionalOrto = provisionalOrto.subtract(gastosLaboratori.getLabOrtodoncia());
+        provisionalOrto = provisionalOrto.multiply(BigDecimal.valueOf(0.65));
+
+        provisionalResta = provisionalResta.subtract(gastosLaboratori.getLabSystem());
+        provisionalResta = provisionalResta.subtract(gastosLaboratori.getLabResitecnic());
+
+        provisionalResta = provisionalResta.multiply(BigDecimal.valueOf(0.75));
+
+        totalFactura = provisionalOrto.add(provisionalResta);
 
         return totalFactura;
 

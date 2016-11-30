@@ -47,11 +47,14 @@ public class LineaFacturaAdapter extends ArrayAdapter<LineaFactura> {
         textoFecha.setText(sdf.format(lineaFactura.getFecha()));
         textoClinica.setText(lineaFactura.getClinica().getNumero().toString());
         textoPaciente.setText(lineaFactura.getPacient().getNom() + " "+ lineaFactura.getPacient().getCognom1());
-//        textoHistoria.setText(lineaFactura.getPacient().getNumeroHistoria());
+
         textoTratamiento.setText(lineaFactura.getTractament().getTipoTractamentEnum().getLabel());
         textoImporte.setText(lineaFactura.getImporte().toString() + " €");
-        textoPago.setText(lineaFactura.getTipusPagament().getCodi());
-        // Return the completed view to render on screen
+
+        if(lineaFactura.getTipusPagament() != null) {
+            textoPago.setText(lineaFactura.getTipusPagament().getCodi());
+        }
+
         return convertView;
     }
 

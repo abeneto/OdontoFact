@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dev.abeneto.charanifact.R;
@@ -28,6 +30,7 @@ public class MainActivity extends ActionBarActivity {
     private Usuari usuariLogat;
     private DatabaseHelper dbHelper;
     private static Menu miMenu;
+    private static ImageView ivFondoGlobal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,8 @@ public class MainActivity extends ActionBarActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navView = (NavigationView) findViewById(R.id.navview);
 
+        ivFondoGlobal = (ImageView) findViewById(R.id.imageBackGlobal);
+        ivFondoGlobal.setImageResource(R.drawable.inicio_odontofac);
 
         navView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -53,6 +58,8 @@ public class MainActivity extends ActionBarActivity {
 
                         boolean fragmentTransaction = false;
                         Fragment fragment = null;
+
+                        ivFondoGlobal.setVisibility(View.INVISIBLE);
 
                         switch (menuItem.getItemId()) {
                             case R.id.menu_seccion_1:
@@ -114,6 +121,8 @@ public class MainActivity extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
         miMenu.findItem(R.id.delete).setVisible(false);
+
+
         return super.onCreateOptionsMenu(menu);
     }
 

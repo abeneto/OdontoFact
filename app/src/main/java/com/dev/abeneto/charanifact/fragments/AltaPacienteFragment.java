@@ -89,15 +89,15 @@ public class AltaPacienteFragment extends Fragment {
         Boolean cancel = false;
         View focusView = null;
 
-        if (inflated.findViewById(R.id.nomInput) == null || ((EditText) inflated.findViewById(R.id.nomInput)).getText().toString().equals("")) {
+        if (inflated.findViewById(R.id.nomInput) == null || ((EditText) inflated.findViewById(R.id.nomInput)).getText().toString().isEmpty()) {
             ((EditText) inflated.findViewById(R.id.nomInput)).setError(getString(R.string.error_campo_obligatorio));
             cancel = true;
             focusView = (EditText) inflated.findViewById(R.id.nomInput);
-        } else if (inflated.findViewById(R.id.apellido1Input) == null && ((EditText) inflated.findViewById(R.id.apellido1Input)).getText().toString().equals("")) {
+        } else if (inflated.findViewById(R.id.apellido1Input) == null || ((EditText) inflated.findViewById(R.id.apellido1Input)).getText().toString().isEmpty()) {
             ((EditText) inflated.findViewById(R.id.apellido1Input)).setError(getString(R.string.error_campo_obligatorio));
             cancel = true;
             focusView = (EditText) inflated.findViewById(R.id.apellido1Input);
-        } else if (inflated.findViewById(R.id.numHistoriaInput) == null && ((EditText) inflated.findViewById(R.id.numHistoriaInput)).getText().toString().equals("")) {
+        } else if (inflated.findViewById(R.id.numHistoriaInput) == null || ((EditText) inflated.findViewById(R.id.numHistoriaInput)).getText().toString().isEmpty()) {
             ((EditText) inflated.findViewById(R.id.numHistoriaInput)).setError(getString(R.string.error_campo_obligatorio));
             cancel = true;
             focusView = (EditText) inflated.findViewById(R.id.numHistoriaInput);
