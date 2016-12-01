@@ -31,7 +31,6 @@
             android:layout_height="match_parent"
             android:id="@+id/imageBackGlobal"
             android:layout_gravity="center"
-            android:src="@drawable/inicio_odontofac"
             android:background="#FFFFFF" />
     </FrameLayout>
 

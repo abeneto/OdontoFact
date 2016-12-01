@@ -127,7 +127,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         List<LineaFactura> lineasFactura;
 
         Calendar calIni = Calendar.getInstance();
-        calIni.set(Calendar.DAY_OF_MONTH, 1);
+        calIni.set(Calendar.DAY_OF_MONTH, 0);
         calIni.set(Calendar.MONTH, month);
         calIni.set(Calendar.YEAR, year);
 

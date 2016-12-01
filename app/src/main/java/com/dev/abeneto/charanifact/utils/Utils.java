@@ -48,12 +48,12 @@ public class Utils {
         }
 
         provisionalOrto = provisionalOrto.subtract(gastosLaboratori.getLabOrtodoncia());
-        provisionalOrto = provisionalOrto.multiply(BigDecimal.valueOf(0.65));
+        provisionalOrto = provisionalOrto.multiply(BigDecimal.valueOf(0.35));
 
         provisionalResta = provisionalResta.subtract(gastosLaboratori.getLabSystem());
         provisionalResta = provisionalResta.subtract(gastosLaboratori.getLabResitecnic());
 
-        provisionalResta = provisionalResta.multiply(BigDecimal.valueOf(0.75));
+        provisionalResta = provisionalResta.multiply(BigDecimal.valueOf(0.25));
 
         totalFactura = provisionalOrto.add(provisionalResta);
 

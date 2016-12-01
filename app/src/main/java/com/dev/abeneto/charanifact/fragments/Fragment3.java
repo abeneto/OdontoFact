@@ -179,7 +179,7 @@ public class Fragment3 extends Fragment {
         List<LineaFactura> lineasFacturaSelected = new ArrayList<>();
 
         for (int i = 0; i < elementosSelecctionados.size(); i++) {
-            if (Boolean.TRUE.equals(elementosSelecctionados.get(i))) {
+            if (Boolean.TRUE.equals(elementosSelecctionados.get(elementosSelecctionados.keyAt(i)))) {
                 lineasFacturaSelected.add(lineasDeFactura.get(elementosSelecctionados.keyAt(i)));
             }
         }
@@ -324,6 +324,18 @@ public class Fragment3 extends Fragment {
 
             cell = row.createCell(cellnum++);
             cell.setCellValue(this.formatBigDecimal(totalFactura));
+
+
+            rownum += 2;
+
+            row = sheet.createRow(rownum++);
+            cellnum = 0;
+
+            cell = row.createCell(cellnum++);
+            cell.setCellValue(getString(R.string.total_factura_menos_siete_porciento));
+
+            cell = row.createCell(cellnum++);
+            cell.setCellValue(this.formatBigDecimal(totalFactura.multiply(BigDecimal.valueOf(0.93))));
 
             try {
 

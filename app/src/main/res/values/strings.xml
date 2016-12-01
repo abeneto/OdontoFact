@@ -91,5 +91,6 @@
     <string name="excel_label_gastos_laboratorio_system">Laboratorio System</string>
     <string name="toast_message_no_hay_resultados">No hay resultados</string>
     <string name="total_factura">Total factura</string>
+    <string name="total_factura_menos_siete_porciento">Total factura con retención ( 7% )</string>
 
 </resources>

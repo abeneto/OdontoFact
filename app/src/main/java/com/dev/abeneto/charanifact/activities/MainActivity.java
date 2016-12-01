@@ -30,7 +30,7 @@ public class MainActivity extends ActionBarActivity {
     private Usuari usuariLogat;
     private DatabaseHelper dbHelper;
     private static Menu miMenu;
-    private static ImageView ivFondoGlobal;
+    private ImageView ivFondoGlobal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +48,8 @@ public class MainActivity extends ActionBarActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navView = (NavigationView) findViewById(R.id.navview);
 
-        ivFondoGlobal = (ImageView) findViewById(R.id.imageBackGlobal);
-        ivFondoGlobal.setImageResource(R.drawable.inicio_odontofac);
+        this.ivFondoGlobal = (ImageView) findViewById(R.id.imageBackGlobal);
+        this.ivFondoGlobal.setImageResource(R.drawable.inicio_odontofac);
 
         navView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
