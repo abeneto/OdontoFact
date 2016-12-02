@@ -1,6 +1,7 @@
 package com.dev.abeneto.charanifact.fragments;
 
 import android.app.DatePickerDialog;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
@@ -16,6 +17,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.dev.abeneto.charanifact.R;
+import com.dev.abeneto.charanifact.activities.MainActivity;
+import com.dev.abeneto.charanifact.constants.FacturacioConstants;
 import com.dev.abeneto.charanifact.db.DatabaseHelper;
 import com.dev.abeneto.charanifact.enums.ClinicaEnum;
 import com.dev.abeneto.charanifact.enums.TipoTractamentEnum;
@@ -31,8 +34,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -85,7 +86,7 @@ public class Fragment2 extends Fragment {
 
         this.setListenerBotonAnyadir();
 
-        desplegablePacients = (AutoCompleteTextView ) inflated.findViewById(R.id.desplegablePacients);
+        desplegablePacients = (AutoCompleteTextView) inflated.findViewById(R.id.desplegablePacients);
         desplegableCliniques = (Spinner) inflated.findViewById(R.id.desplegableCliniques);
         desplegableTipoPago = (Spinner) inflated.findViewById(R.id.desplegableTipoPago);
         desplegableTratamiento = (Spinner) inflated.findViewById(R.id.desplegableTratmiento);
@@ -115,13 +116,21 @@ public class Fragment2 extends Fragment {
             }
         });
 
-        //this.loadPacients(desplegablePacients);
         this.populateAutocompleteFieldPacients();
         this.loadCliniques(desplegableCliniques);
         this.loadTipoPago(desplegableTipoPago);
         this.loadTratamiento(desplegableTratamiento);
 
         return inflated;
+    }
+
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        MainActivity activity = (MainActivity) getActivity();
+        activity.getIvFondoGlobal().setVisibility(View.INVISIBLE);
+
+        super.onConfigurationChanged(newConfig);
     }
 
     private void setListenerBotonAnyadir() {
@@ -134,9 +143,9 @@ public class Fragment2 extends Fragment {
                 Pacient pacientSelected = null;
 
                 // Obtener paciente seleccionado
-                for(int i=0;i<nomsPacients.size();i++){
+                for (int i = 0; i < nomsPacients.size(); i++) {
 
-                    if(desplegablePacients.getText().toString().equals(nomsPacients.get(i))){
+                    if (desplegablePacients.getText().toString().equals(nomsPacients.get(i))) {
                         pacientSelected = pacients.get(i);
                     }
                 }
@@ -147,8 +156,6 @@ public class Fragment2 extends Fragment {
                 String importeEditText = ((EditText) inflated.findViewById(R.id.importeEditText)).getText().toString();
                 String observacionesInput = ((EditText) inflated.findViewById(R.id.observacionesInput)).getText().toString();
                 String fecha = campoFecha.getText().toString();
-
-                TipusPagament tipusPagament = null;
 
                 //TODO: obtenir els tractaments del pacient de bbdd, si es el mateix obtenirlo i afegirli linea factura, sino crear uno nou
                 Tractament tratamentPacient = obtenirTractamentPacient(pacientSelected, tratamientoSelected);
@@ -177,7 +184,7 @@ public class Fragment2 extends Fragment {
 
                 lineaFactura.setClinica(getClinica(clinicaSelected));
 
-                DateFormat format = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+                DateFormat format = new SimpleDateFormat(FacturacioConstants.SIMPLE_DATE_FORMAT_PATTERN, Locale.ENGLISH);
                 Date date = null;
                 try {
                     date = format.parse(fecha);
@@ -269,7 +276,7 @@ public class Fragment2 extends Fragment {
             tipusPagament = TipusPagament.FINANSAMENT;
         } else if (tipoPago.equals(TipusPagament.TARGETA.getLabel())) {
             tipusPagament = TipusPagament.TARGETA;
-        }  else if (tipoPago.equals(TipusPagament.TRANSFERENCIA.getLabel())) {
+        } else if (tipoPago.equals(TipusPagament.TRANSFERENCIA.getLabel())) {
             tipusPagament = TipusPagament.TRANSFERENCIA;
         }
 
@@ -304,45 +311,13 @@ public class Fragment2 extends Fragment {
                 }
             }
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_dropdown_item_1line, nomsPacients);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_dropdown_item_1line, nomsPacients);
 
             this.desplegablePacients.setAdapter(adapter);
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
-
-   /* private void loadPacients(Spinner desplegablePacients) {
-        try {
-            pacients = dbHelper.getPacientDao().queryForAll();
-            if (pacients != null) {
-                nomsPacients = new ArrayList<String>();
-                for (Pacient p : pacients) {
-                    nomsPacients.add(p.getNom() + " " + p.getCognom1());
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        if (pacients != null) {
-
-            Collections.sort(pacients, new Comparator<Pacient>() {
-                @Override
-                public int compare(Pacient p1, Pacient p2) {
-                    if(p1.getCognom1().equals(p2.getCognom1()))
-                        return 0;
-                    return p1.getCognom1().compareTo(p2.getCognom1());
-                }
-            });
-
-            adapterPacients = new ArrayAdapter<Pacient>(getActivity().getApplicationContext(),
-                    R.layout.spinner_item, pacients);
-            adapterPacients.setDropDownViewResource(R.layout.spinner_dropdown_item);
-            desplegablePacients.setAdapter(adapterPacients);
-
-        }
-    }*/
 
     private void loadCliniques(Spinner desplegableCliniques) {
         llistaCliniques = new ArrayList<>();

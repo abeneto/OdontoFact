@@ -30,6 +30,7 @@
             android:name=".activities.MainActivity"
             android:label="@string/app_name" android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".activities.PacienteBean"></activity>
+        <activity android:name=".activities.Preferencias"></activity>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.dev.abeneto.charanifact"

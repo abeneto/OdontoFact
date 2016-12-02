@@ -1,5 +1,6 @@
 package com.dev.abeneto.charanifact.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -82,6 +83,7 @@ public class MainActivity extends ActionBarActivity {
                                 fragment = new FragmentConsultarPacientes();
                                 fragmentTransaction = true;
                                 break;
+
                             case R.id.menu_opcion_2:
                                 Log.i("NavigationView", "Pulsada opción 2");
                                 break;
@@ -142,6 +144,10 @@ public class MainActivity extends ActionBarActivity {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
+            case R.id.action_settings:
+                Intent i = new Intent(this, Preferencias.class);
+                startActivity(i);
+                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -152,4 +158,11 @@ public class MainActivity extends ActionBarActivity {
         return miMenu;
     }
 
+    public ImageView getIvFondoGlobal() {
+        return ivFondoGlobal;
+    }
+
+    public void setIvFondoGlobal(ImageView ivFondoGlobal) {
+        this.ivFondoGlobal = ivFondoGlobal;
+    }
 }

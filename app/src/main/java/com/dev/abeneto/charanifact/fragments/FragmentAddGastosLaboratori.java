@@ -1,5 +1,6 @@
 package com.dev.abeneto.charanifact.fragments;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -14,8 +15,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.dev.abeneto.charanifact.R;
+import com.dev.abeneto.charanifact.activities.MainActivity;
 import com.dev.abeneto.charanifact.db.DatabaseHelper;
 import com.dev.abeneto.charanifact.pojo.GastosLaboratori;
+import com.dev.abeneto.charanifact.utils.Utils;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -63,8 +66,8 @@ public class FragmentAddGastosLaboratori extends Fragment {
         spinnerAnyo = (Spinner) inflated.findViewById(R.id.spinnerAnyo);
         spinnerMes = (Spinner) inflated.findViewById(R.id.spinnerMes);
 
-        this.cargarMeses();
-        this.cargarAnyos();
+        this.meses = Utils.cargarMeses(getActivity());
+        this.anyos = Utils.cargarAnyos(getActivity());
 
         adapterMeses = new ArrayAdapter<String>(getActivity().getApplicationContext(),
                 R.layout.spinner_item, meses);
@@ -99,7 +102,7 @@ public class FragmentAddGastosLaboratori extends Fragment {
                         gastosLaboratori.setLabOrtodoncia(new BigDecimal(Double.valueOf(editTextOrto.getText().toString())));
                         gastosLaboratori.setLabResitecnic(new BigDecimal(Double.valueOf(editTextResi.getText().toString())));
                         gastosLaboratori.setLabSystem(new BigDecimal(Double.valueOf(editTextSystem.getText().toString())));
-                        gastosLaboratori.setMes(getMesSelected((String) spinnerMes.getSelectedItem()));
+                        gastosLaboratori.setMes(Utils.getMesSelected(getActivity(), (String) spinnerMes.getSelectedItem()));
 
                         dbHelper.getGastosLabDao().create(gastosLaboratori);
 
@@ -119,71 +122,15 @@ public class FragmentAddGastosLaboratori extends Fragment {
         return inflated;
     }
 
-    private void cargarMeses() {
 
-        meses = new ArrayList<>();
-        meses.add(getResources().getString(R.string.enero));
-        meses.add(getResources().getString(R.string.febrero));
-        meses.add(getResources().getString(R.string.marzo));
-        meses.add(getResources().getString(R.string.abril));
-        meses.add(getResources().getString(R.string.mayo));
-        meses.add(getResources().getString(R.string.junio));
-        meses.add(getResources().getString(R.string.julio));
-        meses.add(getResources().getString(R.string.agosto));
-        meses.add(getResources().getString(R.string.septiembre));
-        meses.add(getResources().getString(R.string.octubre));
-        meses.add(getResources().getString(R.string.noviembre));
-        meses.add(getResources().getString(R.string.diciembre));
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        MainActivity activity = (MainActivity) getActivity();
+        activity.getIvFondoGlobal().setVisibility(View.INVISIBLE);
 
+        super.onConfigurationChanged(newConfig);
     }
 
-    private Integer getMesSelected(String mesSelected) {
-
-        Integer mesInteger = 0;
-
-        if (mesSelected.equalsIgnoreCase(getString(R.string.enero))) {
-            mesInteger = 1;
-        } else if (mesSelected.equalsIgnoreCase(getString(R.string.febrero))) {
-            mesInteger = 2;
-        } else if (mesSelected.equalsIgnoreCase(getString(R.string.marzo))) {
-            mesInteger = 3;
-        } else if (mesSelected.equalsIgnoreCase(getString(R.string.abril))) {
-            mesInteger = 4;
-        } else if (mesSelected.equalsIgnoreCase(getString(R.string.mayo))) {
-            mesInteger = 5;
-        } else if (mesSelected.equalsIgnoreCase(getString(R.string.junio))) {
-            mesInteger = 6;
-        } else if (mesSelected.equalsIgnoreCase(getString(R.string.julio))) {
-            mesInteger = 7;
-        } else if (mesSelected.equalsIgnoreCase(getString(R.string.agosto))) {
-            mesInteger = 8;
-        } else if (mesSelected.equalsIgnoreCase(getString(R.string.septiembre))) {
-            mesInteger = 9;
-        } else if (mesSelected.equalsIgnoreCase(getString(R.string.octubre))) {
-            mesInteger = 10;
-        } else if (mesSelected.equalsIgnoreCase(getString(R.string.noviembre))) {
-            mesInteger = 11;
-        } else if (mesSelected.equalsIgnoreCase(getString(R.string.diciembre))) {
-            mesInteger = 12;
-        }
-
-        return mesInteger;
-
-    }
-
-    private void cargarAnyos() {
-
-        anyos = new ArrayList<>();
-
-        Calendar calendar = GregorianCalendar.getInstance();
-
-        int anyoActual = calendar.get(Calendar.YEAR);
-
-        anyos.add(anyoActual - 1);
-        anyos.add(anyoActual);
-        anyos.add(anyoActual + 1);
-
-    }
 
     private Boolean checkAltaGastos(View view) throws SQLException {
         Boolean cancel = false;
@@ -205,7 +152,7 @@ public class FragmentAddGastosLaboratori extends Fragment {
 
 
         Map<String, Object> fieldsGastos = new HashMap<>();
-        fieldsGastos.put("mes", getMesSelected((String) spinnerMes.getSelectedItem()));
+        fieldsGastos.put("mes", Utils.getMesSelected(getActivity(), (String) spinnerMes.getSelectedItem()));
         fieldsGastos.put("any", spinnerAnyo.getSelectedItem());
 
         if (dbHelper.getGastosByFields(fieldsGastos) != null) {

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="preferencias_principal" >
+    <PreferenceCategory
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:key="preferencias_principal_porcentajes"
+        android:title="Porcentajes a aplicar en la factura">
+        <EditTextPreference
+            android:key="porcentajeOrto"
+            android:title="Porcentaje de Ortodoncia"
+            android:summary="Porcentaje a aplicar sobre tratamientos de ortodoncia"
+            android:defaultValue="35"/>
+        <EditTextPreference
+            android:key="porcentajeOtros"
+            android:title="Porcentaje del resto de tratamientos"
+            android:summary="Porcentaje a aplicar sobre el resto de tratamientos"
+            android:defaultValue="25"/>
+        <EditTextPreference
+            android:key="rentencionAutonomo"
+            android:title="Rentención IRPF Autónomo"
+            android:summary="Porcentaje de retención a aplicar sobre el total de la factura"
+            android:defaultValue="7"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:key="preferencias_principal_descuentos"
+        android:title="Descuentos">
+        <EditTextPreference
+            android:key="descuentoTarjeta"
+            android:title="Descuento pago con tarjeta"
+            android:summary="Porcentaje de descuento para los pagos con tarjeta"
+            android:defaultValue="0.9"/>
+    </PreferenceCategory>
+</PreferenceScreen>

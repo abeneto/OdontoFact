@@ -13,7 +13,8 @@
         android:layout_marginRight="5dp"
         android:layout_weight="1"
         android:text="Small Text"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="10dp" />
 
     <TextView
         android:id="@+id/textoClinicaLinia"
@@ -24,7 +25,8 @@
         android:layout_weight="1"
         android:gravity="center"
         android:text="Small Text"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="10dp" />
 
     <TextView
         android:id="@+id/textoPacienteLinia"
@@ -33,7 +35,8 @@
         android:layout_marginRight="5dp"
         android:layout_weight="2"
         android:text="Small Text"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="10dp" />
 
     <TextView
         android:id="@+id/textoTratamientoLinia"
@@ -42,7 +45,8 @@
         android:layout_marginRight="5dp"
         android:layout_weight="2"
         android:text="Small Text"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="10dp" />
 
     <TextView
         android:id="@+id/textoImporteLinia"
@@ -51,7 +55,8 @@
         android:layout_marginRight="5dp"
         android:layout_weight="1"
         android:text="Small Text"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="10dp" />
 
     <TextView
         android:id="@+id/tipoPagoLinia"
@@ -60,5 +65,6 @@
         android:layout_marginRight="5dp"
         android:layout_weight="1"
         android:text="Small Text"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="10dp" />
 </com.dev.abeneto.charanifact.custom_elements.CheckedLinearLayout>
