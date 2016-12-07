@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activities.LoginActivity"
-            android:label="Facturació">
+            android:label="OdontoFact">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

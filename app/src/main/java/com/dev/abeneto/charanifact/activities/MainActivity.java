@@ -24,6 +24,9 @@ import com.dev.abeneto.charanifact.fragments.FragmentAddGastosLaboratori;
 import com.dev.abeneto.charanifact.fragments.FragmentConsultarPacientes;
 import com.dev.abeneto.charanifact.pojo.Usuari;
 
+import java.sql.SQLException;
+import java.util.List;
+
 public class MainActivity extends ActionBarActivity {
 
     private Toolbar appbar;
@@ -148,11 +151,39 @@ public class MainActivity extends ActionBarActivity {
                 Intent i = new Intent(this, Preferencias.class);
                 startActivity(i);
                 break;
+            case R.id.action_logout:
+                deslogarUsuarioActual();
+                Intent intent_login = new Intent(this, LoginActivity.class);
+                startActivity(intent_login);
+                finish();
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    private void deslogarUsuarioActual() {
+
+        Usuari usuari = null;
+
+        try {
+            DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+            List<Usuari> usuaris = db.getUsuariDao().queryForAll();
+
+            for (Usuari usuariAux : usuaris) {
+                if (usuariAux.getLogado() == Boolean.TRUE) {
+                    usuari = usuariAux;
+                    break;
+                }
+            }
+
+            usuari.setLogado(Boolean.FALSE);
+
+            db.getUsuariDao().update(usuari);
+
+        }catch (SQLException e) {
+            Log.e("ERROR EN LOGOUT: ","LOGOUT: ", e);
+        }
+    }
 
     public Menu getMiMenu() {
         return miMenu;
