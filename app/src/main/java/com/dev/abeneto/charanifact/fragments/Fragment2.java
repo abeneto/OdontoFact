@@ -1,6 +1,7 @@
 package com.dev.abeneto.charanifact.fragments;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -329,7 +330,7 @@ public class Fragment2 extends Fragment {
         return tipoTractamentEnum;
     }
 
-    private void populateAutocompleteFieldPacients() {
+    public void populateAutocompleteFieldPacients() {
         try {
             pacients = dbHelper.getPacientDao().queryForAll();
             if (pacients != null) {

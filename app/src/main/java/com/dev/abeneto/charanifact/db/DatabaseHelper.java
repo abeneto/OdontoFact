@@ -134,9 +134,10 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         Calendar calFin = Calendar.getInstance();
         calFin.set(Calendar.MONTH, month);
         calFin.set(Calendar.YEAR, year);
-        calFin.set(Calendar.DAY_OF_MONTH, calIni.getActualMaximum(Calendar.DAY_OF_MONTH));
+        calFin.set(Calendar.DAY_OF_MONTH, calFin.getActualMaximum(Calendar.DAY_OF_MONTH));
 
         QueryBuilder<LineaFactura, Long> queryBuilder = this.getLineaFacturaDao().queryBuilder();
+       // queryBuilder.where().le("fecha",calFin.getTime()).and().ge("fecha",calIni.getTime());
         queryBuilder.where().between("fecha", calIni.getTime(), calFin.getTime());
 
         PreparedQuery<LineaFactura> preparedQuery = queryBuilder.prepare();

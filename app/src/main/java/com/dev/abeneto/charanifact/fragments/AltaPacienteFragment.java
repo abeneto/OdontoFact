@@ -1,5 +1,6 @@
 package com.dev.abeneto.charanifact.fragments;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -116,6 +117,12 @@ public class AltaPacienteFragment extends DialogFragment {
         }
 
         return true;
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        Fragment2 parent = (Fragment2) getFragmentManager().getFragments().get(0);
+        parent.populateAutocompleteFieldPacients();
     }
 
 }
