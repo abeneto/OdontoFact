@@ -1,7 +1,8 @@
 package com.dev.abeneto.charanifact.fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,7 +20,7 @@ import java.sql.SQLException;
 /**
  * Created by Alberto on 11/09/2016.
  */
-public class AltaPacienteFragment extends Fragment {
+public class AltaPacienteFragment extends DialogFragment {
 
     DatabaseHelper dbHelper = null;
     View inflated = null;
@@ -32,6 +33,7 @@ public class AltaPacienteFragment extends Fragment {
     public AltaPacienteFragment() {
         // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,8 +62,8 @@ public class AltaPacienteFragment extends Fragment {
                     try {
                         dbHelper.getPacientDao().create(pacient);
                         Log.i("Paciente creado", "Paciente CREADO: " + pacient.getNom());
-                        Toast toast =  Toast.makeText(inflated.getContext(), "Paciente " + pacient.getNom() + " " + pacient.getCognom1()+" añadido correctamente.", Toast.LENGTH_SHORT);
-                        toast.setGravity(Gravity.CENTER,0,30);
+                        Toast toast = Toast.makeText(inflated.getContext(), "Paciente " + pacient.getNom() + " " + pacient.getCognom1() + " añadido correctamente.", Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 30);
                         toast.show();
 
                         limpiarCampos();
@@ -73,6 +75,11 @@ public class AltaPacienteFragment extends Fragment {
                 }
             }
         });
+
+        Bundle args = getArguments();
+        Boolean showAsDialog = args.getBoolean("showAsDialog");
+
+        setShowsDialog(showAsDialog);
 
         return inflated;
 

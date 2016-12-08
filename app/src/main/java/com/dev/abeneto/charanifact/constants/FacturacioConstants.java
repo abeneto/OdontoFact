@@ -17,5 +17,10 @@ public class FacturacioConstants {
     public static final String FIELD_PATIENT_COGNOM1 = "cognom1";
     public static final String FIELD_PATIENT_NUMERO_HISTORIA = "numeroHistoria";
 
+    /**
+     * Fragment dialog
+     */
+
+    public static final String FIELD_FRAGMENT_DIALOG_SHOW_AS_DIALOG = "showAsDialog";
 }
 

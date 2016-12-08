@@ -69,6 +69,11 @@ public class MainActivity extends ActionBarActivity {
                             case R.id.menu_seccion_1:
                                 fragment = new AltaPacienteFragment();
                                 fragmentTransaction = true;
+
+                                Bundle args = new Bundle();
+                                args.putBoolean("showAsDialog", Boolean.FALSE);
+                                fragment.setArguments(args);
+
                                 break;
                             case R.id.menu_seccion_2:
                                 fragment = new Fragment2();

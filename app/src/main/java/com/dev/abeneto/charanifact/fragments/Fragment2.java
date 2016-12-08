@@ -53,6 +53,7 @@ public class Fragment2 extends Fragment {
     Spinner desplegableTipoPago = null;
     Spinner desplegableTratamiento = null;
     EditText campoFecha = null;
+    Button botonAddPacienteDialog = null;
 
     List<Pacient> pacients = null;
 
@@ -79,23 +80,25 @@ public class Fragment2 extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         inflated = inflater.inflate(R.layout.fragment_fragment2, container, false);
-        dbHelper = new DatabaseHelper(getActivity().getApplicationContext());
+        this.dbHelper = new DatabaseHelper(getActivity().getApplicationContext());
 
-        botonAnyadir = (Button) inflated.findViewById(R.id.botonAnyadir);
-        botonResetForm = (Button) inflated.findViewById(R.id.botonResetForm);
+        this.botonAnyadir = (Button) inflated.findViewById(R.id.botonAnyadir);
+        this.botonResetForm = (Button) inflated.findViewById(R.id.botonResetForm);
+        this.botonAddPacienteDialog = (Button) inflated.findViewById(R.id.botonAddPacienteDialog);
 
         this.setListenerBotonAnyadir();
+        this.setListenerBotonAddPacienteDialog();
 
-        desplegablePacients = (AutoCompleteTextView) inflated.findViewById(R.id.desplegablePacients);
-        desplegableCliniques = (Spinner) inflated.findViewById(R.id.desplegableCliniques);
-        desplegableTipoPago = (Spinner) inflated.findViewById(R.id.desplegableTipoPago);
-        desplegableTratamiento = (Spinner) inflated.findViewById(R.id.desplegableTratmiento);
-        campoFecha = (EditText) inflated.findViewById(R.id.editTextFecha);
+        this.desplegablePacients = (AutoCompleteTextView) inflated.findViewById(R.id.desplegablePacients);
+        this.desplegableCliniques = (Spinner) inflated.findViewById(R.id.desplegableCliniques);
+        this.desplegableTipoPago = (Spinner) inflated.findViewById(R.id.desplegableTipoPago);
+        this.desplegableTratamiento = (Spinner) inflated.findViewById(R.id.desplegableTratmiento);
+        this.campoFecha = (EditText) inflated.findViewById(R.id.editTextFecha);
 
         Date hoy = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        campoFecha.setText(sdf.format(hoy));
-        campoFecha.setOnClickListener(new View.OnClickListener() {
+        SimpleDateFormat sdf = new SimpleDateFormat(FacturacioConstants.SIMPLE_DATE_FORMAT_PATTERN);
+        this.campoFecha.setText(sdf.format(hoy));
+        this.campoFecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatePickerFragment date = new DatePickerFragment();
@@ -121,16 +124,41 @@ public class Fragment2 extends Fragment {
         this.loadTipoPago(desplegableTipoPago);
         this.loadTratamiento(desplegableTratamiento);
 
+        this.dissableBackground();
+
         return inflated;
+    }
+
+    @Override
+    public void onResume() {
+        this.populateAutocompleteFieldPacients();
+        super.onResume();
+    }
+
+    public void dissableBackground() {
+        MainActivity activity = (MainActivity) getActivity();
+        activity.getIvFondoGlobal().setVisibility(View.INVISIBLE);
     }
 
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        MainActivity activity = (MainActivity) getActivity();
-        activity.getIvFondoGlobal().setVisibility(View.INVISIBLE);
+        this.dissableBackground();
 
         super.onConfigurationChanged(newConfig);
+    }
+
+    private void setListenerBotonAddPacienteDialog() {
+        this.botonAddPacienteDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AltaPacienteFragment fragment = new AltaPacienteFragment();
+                Bundle args = new Bundle();
+                args.putBoolean(FacturacioConstants.FIELD_FRAGMENT_DIALOG_SHOW_AS_DIALOG, Boolean.TRUE);
+                fragment.setArguments(args);
+                fragment.show(getActivity().getSupportFragmentManager(), "alta_paciente_dialog");
+            }
+        });
     }
 
     private void setListenerBotonAnyadir() {
