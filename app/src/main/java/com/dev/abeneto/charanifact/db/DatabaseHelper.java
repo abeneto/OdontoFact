@@ -17,8 +17,6 @@ import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
-import org.apache.poi.ss.usermodel.Table;
-
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
@@ -54,9 +52,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
             Usuari usuariAdmin = new Usuari();
             usuariAdmin.setLogin("admin");
-            usuariAdmin.setPassword("admin");
-            usuariAdmin.setNombre("admin");
-            usuariAdmin.setApellido1("admin");
+            usuariAdmin.setPassword("04f2d70");
+            usuariAdmin.setNombre("Alberto");
+            usuariAdmin.setApellido1("Benetó");
             this.usuariDao.create(usuariAdmin);
 
             Usuari usuariEva = new Usuari();
@@ -66,11 +64,291 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             usuariEva.setApellido1("Bellvís");
             this.usuariDao.create(usuariEva);
 
+            this.crearPacientes();
+
+
             Log.d("Usuari creat: ", "Usuari creat: " + usuariAdmin.getLogin() + " id: " + usuariAdmin.getId());
             Log.d("Usuari creat: ", "Usuari creat: " + usuariAdmin.getLogin() + " id: " + usuariAdmin.getId());
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private void crearPacientes() {
+        try {
+
+            if(this.pacientDao == null) {
+                this.pacientDao = this.getPacientDao();
+            }
+
+            Pacient pacient = new Pacient();
+            pacient.setNom("Guiliana");
+            pacient.setCognom1("Vilela");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("2892");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Beatriz");
+            pacient.setCognom1("Valverde");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("2645");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Boukan");
+            pacient.setCognom1("Fuster");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("3141");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Mª Carmen");
+            pacient.setCognom1("Chavarría");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("1065");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Tania");
+            pacient.setCognom1("Ferrer");
+            pacient.setCognom2("Torres");
+            pacient.setNumeroHistoria("3178");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Sheryl");
+            pacient.setCognom1("Ramírez");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("3175");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Miriam");
+            pacient.setCognom1("Fernández");
+            pacient.setCognom2("Canós");
+            pacient.setNumeroHistoria("288");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Mónica");
+            pacient.setCognom1("Piles");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("201");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Estela");
+            pacient.setCognom1("Muñoz");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("3237");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Clara");
+            pacient.setCognom1("Muñoz");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("3295");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Marcos");
+            pacient.setCognom1("Ferrando");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("2897");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Claudia");
+            pacient.setCognom1("Ghigoarta");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("2710");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Alejandro");
+            pacient.setCognom1("Gil");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("2734");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Emilio");
+            pacient.setCognom1("Sanz");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("2704");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Oscar");
+            pacient.setCognom1("Aponte");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("2619");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Victor");
+            pacient.setCognom1("Bonina");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("1048");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Beatriz");
+            pacient.setCognom1("Iordache");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("2756");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Ana");
+            pacient.setCognom1("García");
+            pacient.setCognom2("de Frutos");
+            pacient.setNumeroHistoria("2612");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Victoria");
+            pacient.setCognom1("Benavent");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("2686");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Laura");
+            pacient.setCognom1("García");
+            pacient.setCognom2("Escandell");
+            pacient.setNumeroHistoria("3346");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Luca");
+            pacient.setCognom1("Centonze");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("2021");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Charrok");
+            pacient.setCognom1("Ouakti");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("3278");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Rebeca");
+            pacient.setCognom1("Soler");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("90");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Anna");
+            pacient.setCognom1("Melchor");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("3220");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Iris");
+            pacient.setCognom1("Cano");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("3056");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Olga");
+            pacient.setCognom1("Vidal");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("3123");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Pedro");
+            pacient.setCognom1("Cosín");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("89");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Antonio");
+            pacient.setCognom1("Serrano");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("3344");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Toñi");
+            pacient.setCognom1("Montaño");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("2899");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Mª Fernanda");
+            pacient.setCognom1("Alves");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("2647");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Beatriz");
+            pacient.setCognom1("Martinez");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("1715");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Eva");
+            pacient.setCognom1("Cuenca");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("1075");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Victor");
+            pacient.setCognom1("Bonina");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("1048");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Sonia");
+            pacient.setCognom1("Salvatierra");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("1063");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Marcos");
+            pacient.setCognom1("Ferrando");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("2897");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Mónica");
+            pacient.setCognom1("Chavarria");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("2682");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Vanesa");
+            pacient.setCognom1("Domingo");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("2709");
+            this.pacientDao.create(pacient);
+
+            pacient.setNom("Javier");
+            pacient.setCognom1("Esponera");
+            pacient.setCognom2("");
+
+            pacient.setNumeroHistoria("2649");
+            this.pacientDao.create(pacient);
+
+        } catch (SQLException e) {
+            Log.e("ERROR", "ERROR creando usuarios", e);
+        }
+
+
     }
 
     @Override
@@ -137,7 +415,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         calFin.set(Calendar.DAY_OF_MONTH, calFin.getActualMaximum(Calendar.DAY_OF_MONTH));
 
         QueryBuilder<LineaFactura, Long> queryBuilder = this.getLineaFacturaDao().queryBuilder();
-       // queryBuilder.where().le("fecha",calFin.getTime()).and().ge("fecha",calIni.getTime());
+        // queryBuilder.where().le("fecha",calFin.getTime()).and().ge("fecha",calIni.getTime());
         queryBuilder.where().between("fecha", calIni.getTime(), calFin.getTime());
 
         PreparedQuery<LineaFactura> preparedQuery = queryBuilder.prepare();
@@ -172,7 +450,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             gastos = this.getGastosLabDao().queryForAll();
         }
 
-        if(gastos!= null && gastos.size() == 1){
+        if (gastos != null && gastos.size() == 1) {
             return gastos.get(0);
         }
 
