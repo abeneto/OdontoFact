@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:key="preferencias_principal">
-    <!--<ListPreference xmlns:android="http://schemas.android.com/apk/res/android"
-        android:entries="@array/language"
-        android:entryValues="@array/languageValues"
-        android:key="language_property"
-        android:title="Idioma" />-->
 
     <PreferenceCategory xmlns:android="http://schemas.android.com/apk/res/android"
         android:key="preferencias_principal_porcentajes"

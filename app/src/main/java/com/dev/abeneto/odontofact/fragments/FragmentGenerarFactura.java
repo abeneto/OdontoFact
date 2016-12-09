@@ -102,7 +102,6 @@ public class FragmentGenerarFactura extends Fragment {
         this.cargarLineasFactura(mesActualSelected, Calendar.getInstance().get(Calendar.YEAR));
 
         Button botonExcel = (Button) inflated.findViewById(R.id.botonGenerarFacturaExcel);
-        Button botonPdf = (Button) inflated.findViewById(R.id.botonGenerarFacturaPdf);
 
         this.cargarMeses();
 
@@ -118,12 +117,6 @@ public class FragmentGenerarFactura extends Fragment {
             }
         });
 
-        botonPdf.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), "Esta funcionalidad aun no está implementada.", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         spinnerMes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

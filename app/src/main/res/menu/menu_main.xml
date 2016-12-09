@@ -9,6 +9,12 @@
         android:title="@string/action_settings"
         app:showAsAction="never" />
     <item
+        android:id="@+id/acerca_de"
+        android:orderInCategory="1"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="@string/acerca_de"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/action_logout"
         android:orderInCategory="1"
         android:icon="@android:drawable/ic_menu_preferences"

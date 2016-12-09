@@ -5,9 +5,9 @@ package com.dev.abeneto.odontofact.enums;
  */
 public enum ClinicaEnum {
 
-    CLINICA_UNO(1L,"Charani 1 - Historiador Diago"),
-    CLINICA_DOS(2L,"Charani 2 - Corts Valencianes"),
-    CLINICA_TRES(3L, "Charani 3 - Fuencaliente");
+    CLINICA_UNO(1L,"Clinica 1 - Calle Colón"),
+    CLINICA_DOS(2L,"Clinica 2 - Avda Puerto"),
+    CLINICA_TRES(3L, "Clinica 3 - Avda Aragón");
 
     private Long numero;
     private String nom;

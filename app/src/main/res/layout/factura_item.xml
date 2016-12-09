@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.dev.abeneto.charanifact.custom_elements.CheckedLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.dev.abeneto.odontofact.custom_elements.CheckedLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/selector_filas"
@@ -67,4 +67,4 @@
         android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textSize="10dp" />
-</com.dev.abeneto.charanifact.custom_elements.CheckedLinearLayout>
+</com.dev.abeneto.odontofact.custom_elements.CheckedLinearLayout>

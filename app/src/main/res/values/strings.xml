@@ -92,5 +92,8 @@
     <string name="total_factura">Total factura</string>
     <string name="total_factura_menos_siete_porciento">Total factura con retención ( 7% )</string>
     <string name="action_logout">Cerrar sesión</string>
+    <string name="acerca_de">Acerca de...</string>
+    <string name="acerca_de_texto">Este programa ha sido desarrollado como trabajo final de la asignatura Android Fundamentos. Ha sido realizado por Alberto Benetó.</string>
+    <string name="pago_label">Pago</string>
 
 </resources>

@@ -185,60 +185,79 @@ public class FragmentInsertarGastos extends Fragment {
                 String observacionesInput = ((EditText) inflated.findViewById(R.id.observacionesInput)).getText().toString();
                 String fecha = campoFecha.getText().toString();
 
-                //TODO: obtenir els tractaments del pacient de bbdd, si es el mateix obtenirlo i afegirli linea factura, sino crear uno nou
-                Tractament tratamentPacient = obtenirTractamentPacient(pacientSelected, tratamientoSelected);
-                try {
-                    if (tratamentPacient != null) {
-                        if (tratamentPacient.getLiniesFactura() == null) {
-                            tratamentPacient.setLiniesFactura(new ArrayList<LineaFactura>());
-                        }
-                        tratamentPacient.getLiniesFactura().add(lineaFactura);
-                        dbHelper.getTractamentDao().update(tratamentPacient);
+                if (pacientSelected == null) {
+                    if(desplegablePacients.getText() != null && !desplegablePacients.getText().toString().isEmpty() ) {
+                        Toast toast = Toast.makeText(inflated.getContext(), "Ha de seleccionar un paciente que ya exista", Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 30);
+                        toast.show();
                     } else {
-                        tratamentPacient = new Tractament();
-                        tratamentPacient.setTipoTractamentEnum(getTipoTractament(tratamientoSelected));
-                        tratamentPacient.setLiniesFactura(new ArrayList<LineaFactura>());
-                        tratamentPacient.getLiniesFactura().add(lineaFactura);
+                        Toast toast = Toast.makeText(inflated.getContext(), "Ha de seleccionar un paciente", Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 30);
+                        toast.show();
+                    }
+                } else if (importeEditText == null || importeEditText.isEmpty()) {
+                    Toast toast = Toast.makeText(inflated.getContext(), "Ha de añadir un importe", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 30);
+                    toast.show();
+                } else {
 
-                        dbHelper.getTractamentDao().create(tratamentPacient);
+
+                    //TODO: obtenir els tractaments del pacient de bbdd, si es el mateix obtenirlo i afegirli linea factura, sino crear uno nou
+                    Tractament tratamentPacient = obtenirTractamentPacient(pacientSelected, tratamientoSelected);
+                    try {
+                        if (tratamentPacient != null) {
+                            if (tratamentPacient.getLiniesFactura() == null) {
+                                tratamentPacient.setLiniesFactura(new ArrayList<LineaFactura>());
+                            }
+                            tratamentPacient.getLiniesFactura().add(lineaFactura);
+                            dbHelper.getTractamentDao().update(tratamentPacient);
+                        } else {
+                            tratamentPacient = new Tractament();
+                            tratamentPacient.setTipoTractamentEnum(getTipoTractament(tratamientoSelected));
+                            tratamentPacient.setLiniesFactura(new ArrayList<LineaFactura>());
+                            tratamentPacient.getLiniesFactura().add(lineaFactura);
+
+                            dbHelper.getTractamentDao().create(tratamentPacient);
+                        }
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        Toast toast = Toast.makeText(inflated.getContext(), "Se ha producido un error al insertar la facturación.", Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 30);
+                        toast.show();
                     }
 
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    Toast toast = Toast.makeText(inflated.getContext(), "Se ha producido un error al insertar la facturación.", Toast.LENGTH_SHORT);
+                    lineaFactura.setClinica(getClinica(clinicaSelected));
+
+                    DateFormat format = new SimpleDateFormat(FacturacioConstants.SIMPLE_DATE_FORMAT_PATTERN, Locale.ENGLISH);
+                    Date date = null;
+                    try {
+                        date = format.parse(fecha);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    lineaFactura.setFecha(date);
+                    lineaFactura.setImporte(new BigDecimal(importeEditText));
+                    lineaFactura.setObservaciones(observacionesInput);
+                    lineaFactura.setPacient(pacientSelected);
+                    lineaFactura.setTipusPagament(getTipoPago(tipoPagoSelected));
+                    lineaFactura.setTractament(tratamentPacient);
+
+                    try {
+                        dbHelper.getLineaFacturaDao().create(lineaFactura);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+
+                        Toast toast = Toast.makeText(inflated.getContext(), "Se ha producido un error al insertar la facturación.", Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 30);
+                        toast.show();
+                    }
+
+                    Toast toast = Toast.makeText(inflated.getContext(), "Se ha insertado la linea de factura correctamente", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 30);
                     toast.show();
+
                 }
-
-                lineaFactura.setClinica(getClinica(clinicaSelected));
-
-                DateFormat format = new SimpleDateFormat(FacturacioConstants.SIMPLE_DATE_FORMAT_PATTERN, Locale.ENGLISH);
-                Date date = null;
-                try {
-                    date = format.parse(fecha);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                lineaFactura.setFecha(date);
-                lineaFactura.setImporte(new BigDecimal(importeEditText));
-                lineaFactura.setObservaciones(observacionesInput);
-                lineaFactura.setPacient(pacientSelected);
-                lineaFactura.setTipusPagament(getTipoPago(tipoPagoSelected));
-                lineaFactura.setTractament(tratamentPacient);
-
-                try {
-                    dbHelper.getLineaFacturaDao().create(lineaFactura);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-
-                    Toast toast = Toast.makeText(inflated.getContext(), "Se ha producido un error al insertar la facturación.", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 30);
-                    toast.show();
-                }
-
-                Toast toast = Toast.makeText(inflated.getContext(), "Se ha insertado la linea de factura correctamente", Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 30);
-                toast.show();
 
             }
         });

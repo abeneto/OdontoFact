@@ -36,7 +36,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:text="Fecha"
+                android:text="@string/fecha_label"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:text="Clínica"
+                android:text="@string/clinica_label"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="2"
-                android:text="Paciente"
+                android:text="@string/paciente_label"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="2"
-                android:text="Tratamiento"
+                android:text="@string/tratamiento_label"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:text="Importe"
+                android:text="@string/importe_label"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:text="Pago"
+                android:text="@string/pago_label"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
 
@@ -109,15 +109,6 @@
                 android:background="@drawable/botones"
                 android:text="@string/generar_factura_excel" />
 
-            <Button
-                android:id="@+id/botonGenerarFacturaPdf"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/botones"
-                android:text="@string/generar_pdf" />
         </LinearLayout>
     </LinearLayout>
 

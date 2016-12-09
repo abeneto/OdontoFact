@@ -112,6 +112,11 @@ public class MainActivity extends ActionBarActivity {
         this.setElementosPantallaUsuario();
     }
 
+    public void lanzarAcercaDe(View view) {
+        Intent i = new Intent(this, AcercaDeActivity.class);
+        startActivity(i);
+    }
+
 
     private void setElementosPantallaUsuario() {
         TextView text = (TextView) findViewById(R.id.labelNombreUsuario);
@@ -158,6 +163,10 @@ public class MainActivity extends ActionBarActivity {
                 Intent intent_login = new Intent(this, LoginActivity.class);
                 startActivity(intent_login);
                 finish();
+                break;
+            case R.id.acerca_de:
+                lanzarAcercaDe(null);
+                break;
         }
 
         return super.onOptionsItemSelected(item);
