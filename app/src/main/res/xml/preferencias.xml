@@ -1,35 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:key="preferencias_principal" >
-    <PreferenceCategory
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="preferencias_principal">
+    <!--<ListPreference xmlns:android="http://schemas.android.com/apk/res/android"
+        android:entries="@array/language"
+        android:entryValues="@array/languageValues"
+        android:key="language_property"
+        android:title="Idioma" />-->
+
+    <PreferenceCategory xmlns:android="http://schemas.android.com/apk/res/android"
         android:key="preferencias_principal_porcentajes"
         android:title="Porcentajes a aplicar en la factura">
         <EditTextPreference
+            android:defaultValue="35"
             android:key="porcentajeOrto"
-            android:title="Porcentaje de Ortodoncia"
             android:summary="Porcentaje a aplicar sobre tratamientos de ortodoncia"
-            android:defaultValue="35"/>
+            android:title="Porcentaje de Ortodoncia" />
         <EditTextPreference
+            android:defaultValue="25"
             android:key="porcentajeOtros"
-            android:title="Porcentaje del resto de tratamientos"
             android:summary="Porcentaje a aplicar sobre el resto de tratamientos"
-            android:defaultValue="25"/>
+            android:title="Porcentaje del resto de tratamientos" />
         <EditTextPreference
+            android:defaultValue="7"
             android:key="rentencionAutonomo"
-            android:title="Rentención IRPF Autónomo"
             android:summary="Porcentaje de retención a aplicar sobre el total de la factura"
-            android:defaultValue="7"/>
+            android:title="Rentención IRPF Autónomo" />
     </PreferenceCategory>
-    <PreferenceCategory
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <PreferenceCategory xmlns:android="http://schemas.android.com/apk/res/android"
         android:key="preferencias_principal_descuentos"
         android:title="Descuentos">
         <EditTextPreference
+            android:defaultValue="0.9"
             android:key="descuentoTarjeta"
-            android:title="Descuento pago con tarjeta"
             android:summary="Porcentaje de descuento para los pagos con tarjeta"
-            android:defaultValue="0.9"/>
+            android:title="Descuento pago con tarjeta" />
     </PreferenceCategory>
 </PreferenceScreen>

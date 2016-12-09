@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="language">
+        <item>Español</item>
+        <item>Valencià</item>
+    </string-array>
+    <string-array name="languageValues">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+</resources>

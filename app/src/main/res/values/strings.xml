@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">OdontoFact</string>
     <string name="action_settings">Configuración</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main" translatable="false">MainActivity</string>
 
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="title_section1" translatable="false">Section 1</string>
+    <string name="title_section2" translatable="false">Section 2</string>
+    <string name="title_section3" translatable="false">Section 3</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Abrir navigation drawer</string>
+    <string name="navigation_drawer_close">Cerrar navigation drawer</string>
 
     <string name="action_example">Example action</string>
     <string name="inicio">Inicio</string>
@@ -27,17 +27,16 @@
     <string name="anyadir_paciente">Añadir Paciente</string>
     <string name="insertar_facturacion">Insertar Facturación</string>
     <string name="generar_factura_mensual">Generar factura mensual</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_login">Registrarse</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Contraseña</string>
     <string name="action_sign_in">Acceder</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
+    <string name="error_invalid_email">La dirección de correo es invalida</string>
+    <string name="error_invalid_password">El password es demasiado corto</string>
+    <string name="error_incorrect_password">El password es incorrecto</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
@@ -50,7 +49,7 @@
     <string name="paciente_label">Paciente:</string>
     <string name="tratamiento_label">Tratamiento</string>
     <string name="clinica_label">Clínica</string>
-    <string name="label_euros">€</string>
+    <string name="label_euros" translatable="false">€</string>
     <string name="label_importe">Importe</string>
     <string name="importe_label">Importe</string>
     <string name="tipo_pago_label">Tipo de pago</string>
@@ -80,12 +79,12 @@
     <string name="noviembre">Noviembre</string>
     <string name="diciembre">Diciembre</string>
     <string name="insertar_gastos_lab">Insertar gastos de laboratorio</string>
-    <string name="error_gastos_ya_existen">El mes y el año seleccionados ya estan incluidos en base de datos</string>
+    <string name="error_gastos_ya_existen">El mes y el año seleccionados ya están incluidos en base de datos</string>
     <string name="action_delete">Eliminar</string>
     <string name="toast_message_lineas_factura_ninguna_seleccionada">Debe seleccionar alguna linea de factura para eliminar</string>
     <string name="toast_message_lineas_factura_eliminadas">Se han eliminado las lineas de factura</string>
     <string name="toast_message_lineas_factura_error">Se ha producido un error eliminando las lineas de factura</string>
-    <string name="excel_label_gastos_laboratorio">Gastos de Laboratorio</string>
+    <string name="excel_label_gastos_laboratorio">Gastos de laboratorio</string>
     <string name="excel_label_gastos_laboratorio_orto">Laboratorio de Ortodoncia</string>
     <string name="excel_label_gastos_laboratorio_resi">Laboratorio Resitecnic</string>
     <string name="excel_label_gastos_laboratorio_system">Laboratorio System</string>

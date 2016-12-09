@@ -3,20 +3,20 @@ package com.dev.abeneto.charanifact.activities;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
-
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,18 +25,19 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.dev.abeneto.charanifact.R;
+import com.dev.abeneto.charanifact.db.DatabaseHelper;
+import com.dev.abeneto.charanifact.pojo.Usuari;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
-
-import com.dev.abeneto.charanifact.R;
-import com.dev.abeneto.charanifact.db.DatabaseHelper;
-import com.dev.abeneto.charanifact.pojo.Pacient;
-import com.dev.abeneto.charanifact.pojo.Usuari;
 
 
 /**
@@ -62,6 +63,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
 
+    private static ImageButton buttonFlagVal;
+    private static ImageButton buttonFlagEs;
+
+    private static Locale localeSelected;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,8 +81,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             DatabaseHelper db = new DatabaseHelper(getApplicationContext());
             List<Usuari> usuaris = db.getUsuariDao().queryForAll();
 
-            for (Usuari usuariAux:usuaris) {
-                if(usuariAux.getLogado() == Boolean.TRUE) {
+            for (Usuari usuariAux : usuaris) {
+                if (usuariAux.getLogado() == Boolean.TRUE) {
                     usuari = usuariAux;
                     break;
                 }
@@ -86,7 +92,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
 
-        if(usuari == null) {
+        if (usuari == null) {
             // Set up the login form.
             mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
             populateAutoComplete();
@@ -113,14 +119,61 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             mLoginFormView = findViewById(R.id.login_form);
             mProgressView = findViewById(R.id.login_progress);
-        }else {
-            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+        } else {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             // Pasem el usuari per parametro a la activitat MainActivity
-            intent.putExtra("usuari",usuari);
+            intent.putExtra("usuari", usuari);
             startActivity(intent);
             finish();
         }
+
+        buttonFlagEs = (ImageButton) findViewById(R.id.imageFlagEs);
+        buttonFlagVal = (ImageButton) findViewById(R.id.imageFlagVal);
+
+        buttonFlagEs.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buttonFlagVal.setImageResource(R.mipmap.flag_val_unsel);
+                buttonFlagEs.setImageResource(R.mipmap.flag_es);
+                changeLanguage(new Locale("es", "ES"));
+            }
+        });
+
+        buttonFlagVal.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buttonFlagVal.setImageResource(R.mipmap.flag_val);
+                buttonFlagEs.setImageResource(R.mipmap.flag_es_unsel);
+                changeLanguage(new Locale("ca", "ES"));
+            }
+        });
+
+        if(localeSelected != null) {
+            if(localeSelected.getLanguage().equals("ca")) {
+                buttonFlagVal.setImageResource(R.mipmap.flag_val);
+                buttonFlagEs.setImageResource(R.mipmap.flag_es_unsel);
+            } else {
+                buttonFlagVal.setImageResource(R.mipmap.flag_val_unsel);
+                buttonFlagEs.setImageResource(R.mipmap.flag_es);
+            }
+        }
     }
+
+    private void changeLanguage(Locale locale) {
+        Resources res = getApplicationContext().getResources();
+        // Change locale settings in the app.
+        DisplayMetrics dm = res.getDisplayMetrics();
+        android.content.res.Configuration conf = res.getConfiguration();
+        conf.locale = locale;
+        res.updateConfiguration(conf, dm);
+        findViewById(R.id.email_login_form).invalidate();
+        Intent intent = getIntent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        localeSelected = locale;
+        finish();
+        startActivity(intent);
+    }
+
 
     private void populateAutoComplete() {
         getLoaderManager().initLoader(0, null, this);
@@ -157,7 +210,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
+            mEmailView.setError(getString(R.string.error_campo_obligatorio));
             focusView = mEmailView;
             cancel = true;
         } else if (!isEmailValid(email)) {
@@ -305,18 +358,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 fieldValues.put("login", mEmail);
                 List<Usuari> usuaris = db.getUsuariDao().queryForFieldValues(fieldValues);
 
-                if(usuaris != null && usuaris.size() == 1 && usuaris.get(0).getPassword() != null && usuaris.get(0).getPassword().equals(mPassword)){
+                if (usuaris != null && usuaris.size() == 1 && usuaris.get(0).getPassword() != null && usuaris.get(0).getPassword().equals(mPassword)) {
                     autenticado = true;
                     usuaris.get(0).setLogado(Boolean.TRUE);
                     db.getUsuariDao().update(usuaris.get(0));
 
-                    Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-                    intent.putExtra("usuari",usuaris.get(0));
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("usuari", usuaris.get(0));
                     startActivity(intent);
                     finish();
                 }
 
-            }catch (SQLException sqle) {
+            } catch (SQLException sqle) {
                 return false;
             }
 

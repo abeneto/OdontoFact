@@ -54,9 +54,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
             Usuari usuariAdmin = new Usuari();
             usuariAdmin.setLogin("admin");
-            usuariAdmin.setPassword("04f2d70");
-            usuariAdmin.setNombre("Alberto");
-            usuariAdmin.setApellido1("Benetó");
+            usuariAdmin.setPassword("admin");
+            usuariAdmin.setNombre("admin");
+            usuariAdmin.setApellido1("admin");
             this.usuariDao.create(usuariAdmin);
 
             Usuari usuariEva = new Usuari();
