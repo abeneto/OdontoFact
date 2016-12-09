@@ -92,9 +92,6 @@ public class MainActivity extends ActionBarActivity {
                                 fragmentTransaction = true;
                                 break;
 
-                            case R.id.menu_opcion_2:
-                                Log.i("NavigationView", "Pulsada opción 2");
-                                break;
                         }
 
                         if (fragmentTransaction) {

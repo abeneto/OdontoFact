@@ -27,10 +27,6 @@
                 android:id="@+id/menu_item_consultar_pacientes"
                 android:icon="@drawable/ic_menu"
                 android:title="@string/consultar_pacientes" />
-            <item
-                android:id="@+id/menu_opcion_2"
-                android:icon="@drawable/ic_menu"
-                android:title="@string/opcion_2" />
         </menu>
     </item>
 </menu>

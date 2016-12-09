@@ -3,4 +3,5 @@
     <string name="app_name">CharaniFact</string>
     <string name="inicio">Inici</string>
     <string name="action_sign_in">Accedir</string>
+    <string name="action_settings">Configuració</string>
 </resources>

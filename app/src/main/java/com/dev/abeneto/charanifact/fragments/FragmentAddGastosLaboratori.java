@@ -119,6 +119,9 @@ public class FragmentAddGastosLaboratori extends Fragment {
             }
         });
 
+        MainActivity activity = (MainActivity) getActivity();
+        activity.getIvFondoGlobal().setVisibility(View.INVISIBLE);
+
         return inflated;
     }
 

@@ -1,5 +1,6 @@
 package com.dev.abeneto.charanifact.fragments;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.dev.abeneto.charanifact.R;
+import com.dev.abeneto.charanifact.activities.MainActivity;
 import com.dev.abeneto.charanifact.constants.FacturacioConstants;
 import com.dev.abeneto.charanifact.db.DatabaseHelper;
 import com.dev.abeneto.charanifact.pojo.Pacient;
@@ -77,6 +79,9 @@ public class FragmentConsultarPacientes extends Fragment {
             }
         });
 
+        MainActivity activity = (MainActivity) getActivity();
+        activity.getIvFondoGlobal().setVisibility(View.INVISIBLE);
+
         return inflated;
     }
 
@@ -106,6 +111,14 @@ public class FragmentConsultarPacientes extends Fragment {
         }
 
         return listaAuxPacientes;
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        MainActivity activity = (MainActivity) getActivity();
+        activity.getIvFondoGlobal().setVisibility(View.INVISIBLE);
+
+        super.onConfigurationChanged(newConfig);
     }
 
 

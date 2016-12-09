@@ -1,6 +1,7 @@
 package com.dev.abeneto.charanifact.fragments;
 
 import android.content.DialogInterface;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.dev.abeneto.charanifact.R;
+import com.dev.abeneto.charanifact.activities.MainActivity;
 import com.dev.abeneto.charanifact.db.DatabaseHelper;
 import com.dev.abeneto.charanifact.pojo.Pacient;
 
@@ -82,8 +84,15 @@ public class AltaPacienteFragment extends DialogFragment {
 
         setShowsDialog(showAsDialog);
 
+        this.dissableBackground();
+
         return inflated;
 
+    }
+
+    public void dissableBackground() {
+        MainActivity activity = (MainActivity) getActivity();
+        activity.getIvFondoGlobal().setVisibility(View.INVISIBLE);
     }
 
     private void limpiarCampos() {
@@ -123,6 +132,13 @@ public class AltaPacienteFragment extends DialogFragment {
     public void onDismiss(DialogInterface dialog) {
         Fragment2 parent = (Fragment2) getFragmentManager().getFragments().get(0);
         parent.populateAutocompleteFieldPacients();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        this.dissableBackground();
+
+        super.onConfigurationChanged(newConfig);
     }
 
 }
