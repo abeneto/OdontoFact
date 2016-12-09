@@ -1,0 +1,50 @@
+package com.dev.abeneto.odontofact.pojo;
+
+import com.dev.abeneto.odontofact.enums.TipoTractamentEnum;
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+/**
+ * Created by Alberto on 13/09/2016.
+ */
+@DatabaseTable(tableName = "tractament")
+public class Tractament implements Serializable {
+
+    private static final long serialVersionUID = -3285075995254920886L;
+    @DatabaseField(generatedId = true)
+    private Long id;
+
+    @DatabaseField
+    private TipoTractamentEnum tipoTractamentEnum;
+
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
+    private ArrayList<LineaFactura> liniesFactura;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public TipoTractamentEnum getTipoTractamentEnum() {
+        return tipoTractamentEnum;
+    }
+
+    public void setTipoTractamentEnum(TipoTractamentEnum tipoTractamentEnum) {
+        this.tipoTractamentEnum = tipoTractamentEnum;
+    }
+
+    public ArrayList<LineaFactura> getLiniesFactura() {
+        return liniesFactura;
+    }
+
+    public void setLiniesFactura(ArrayList<LineaFactura> liniesFactura) {
+        this.liniesFactura = liniesFactura;
+    }
+}
