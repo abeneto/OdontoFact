@@ -43,7 +43,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/imageFlagEs"
                     android:src="@mipmap/flag_es"
-                    android:background="@android:color/transparent" />
+                    android:background="@android:color/transparent"
+                    android:layout_marginLeft="10dp" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
