@@ -19,6 +19,7 @@ import com.j256.ormlite.table.TableUtils;
 
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +28,7 @@ import java.util.Map;
  */
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
-    private static final String DATABASE_NAME = "facturacio_aabm";
+    private static final String DATABASE_NAME = "facturacio_db";
     private static final int DATABASE_VERSION = 1;
 
     private Dao<Pacient, Long> pacientDao;
@@ -77,7 +78,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private void crearPacientes() {
         try {
 
-            if(this.pacientDao == null) {
+            if (this.pacientDao == null) {
                 this.pacientDao = this.getPacientDao();
             }
 
@@ -438,6 +439,27 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
         return pacientes;
 
+    }
+
+    public List<Pacient> buscarPacientesPorHistoriayApellido(String apellido, String numHistoria) throws SQLException {
+
+        List<Pacient> pacientes = null;
+
+        if (numHistoria != null) {
+            Map<String, Object> fieldsPaciente = new HashMap<>();
+            fieldsPaciente.put("numeroHistoria", numHistoria);
+            pacientes = getPacientesByFields(fieldsPaciente);
+        } else if (apellido != null) {
+            QueryBuilder<Pacient, Long> queryBuilder = this.getPacientDao().queryBuilder();
+            queryBuilder.where().like("cognom1", apellido).or().like("cognom2", apellido);
+            PreparedQuery<Pacient> preparedQuery = queryBuilder.prepare();
+
+            pacientes = this.getPacientDao().query(preparedQuery);
+        } else {
+            pacientes = this.getPacientDao().queryForAll();
+        }
+
+        return pacientes;
     }
 
     public GastosLaboratori getGastosByFields(Map<String, Object> fieldsGastos) throws SQLException {

@@ -12,87 +12,78 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <TextView
+                android:id="@+id/textViewHistoria"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text="@string/numero_historia"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="13dp" />
+
+            <EditText
+                android:id="@+id/editTextHistoria"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
                 android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textViewHistoria"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="@string/numero_historia"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textSize="13dp" />
-
-                <EditText
-                    android:id="@+id/editTextHistoria"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/desplegables"
-                    android:ems="10"
-                    android:inputType="number"
-                    android:textSize="13dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textViewApellido"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="@string/apellido1"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textSize="13dp" />
-
-                <EditText
-                    android:id="@+id/editTextApellido"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/desplegables"
-                    android:inputType="text"
-                    android:textSize="13dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:orientation="horizontal"
-                android:paddingRight="10dp">
-
-                <Button
-                    android:id="@+id/botonBuscarPaciente"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/botones"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:text="@string/buscar" />
-            </LinearLayout>
+                android:background="@drawable/desplegables"
+                android:ems="10"
+                android:inputType="number"
+                android:textSize="13dp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:id="@+id/textViewApellido"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text="@string/apellido"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="13dp" />
+
+            <EditText
+                android:id="@+id/editTextApellido"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/desplegables"
+                android:inputType="text"
+                android:textSize="13dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp">
+
+            <Button
+                android:id="@+id/botonBuscarPaciente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/botones"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/buscar" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp">
 
             <ListView
                 android:id="@+id/listViewPacientes"

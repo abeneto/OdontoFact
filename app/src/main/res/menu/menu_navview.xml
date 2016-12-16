@@ -3,19 +3,19 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/menu_seccion_1"
-            android:icon="@drawable/ic_menu"
+            android:icon="@drawable/ic_assignment_ind_black_24dp"
             android:title="@string/anyadir_paciente" />
         <item
             android:id="@+id/menu_seccion_2"
-            android:icon="@drawable/ic_menu"
+            android:icon="@drawable/ic_create_black_24dp"
             android:title="@string/insertar_facturacion" />
         <item
             android:id="@+id/menu_seccion_alta_gastos_lab"
-            android:icon="@drawable/ic_menu"
+            android:icon="@drawable/flask_outline"
             android:title="@string/insertar_gastos_lab" />
         <item
             android:id="@+id/menu_seccion_3"
-            android:icon="@drawable/ic_menu"
+            android:icon="@drawable/receipt"
             android:title="@string/generar_factura_mensual" />
     </group>
 
@@ -25,7 +25,7 @@
         <menu>
             <item
                 android:id="@+id/menu_item_consultar_pacientes"
-                android:icon="@drawable/ic_menu"
+                android:icon="@drawable/head"
                 android:title="@string/consultar_pacientes" />
         </menu>
     </item>

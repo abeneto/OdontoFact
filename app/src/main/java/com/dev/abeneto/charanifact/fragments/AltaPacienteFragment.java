@@ -3,7 +3,6 @@ package com.dev.abeneto.charanifact.fragments;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.Gravity;
@@ -32,6 +31,7 @@ public class AltaPacienteFragment extends DialogFragment {
     private EditText editTextApellido1;
     private EditText editTextApellido2;
     private EditText editTextNumHistoria;
+    private Boolean showAsDialog;
 
     public AltaPacienteFragment() {
         // Required empty public constructor
@@ -80,14 +80,30 @@ public class AltaPacienteFragment extends DialogFragment {
         });
 
         Bundle args = getArguments();
-        Boolean showAsDialog = args.getBoolean("showAsDialog");
+        if(args != null) {
+            showAsDialog = args.getBoolean("showAsDialog");
+        } else {
+            showAsDialog = false;
+        }
 
         setShowsDialog(showAsDialog);
+
+        if (showAsDialog) {
+            this.getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        }
 
         this.dissableBackground();
 
         return inflated;
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (showAsDialog) {
+            this.getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
     }
 
     public void dissableBackground() {

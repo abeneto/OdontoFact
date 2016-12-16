@@ -2,6 +2,7 @@ package com.dev.abeneto.charanifact.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -9,11 +10,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dev.abeneto.charanifact.R;
 import com.dev.abeneto.charanifact.db.DatabaseHelper;
@@ -25,6 +28,7 @@ import com.dev.abeneto.charanifact.fragments.FragmentConsultarPacientes;
 import com.dev.abeneto.charanifact.pojo.Usuari;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
@@ -35,6 +39,11 @@ public class MainActivity extends ActionBarActivity {
     private DatabaseHelper dbHelper;
     private static Menu miMenu;
     private ImageView ivFondoGlobal;
+    private List<Fragment> listaFragmentsVisitados = new ArrayList<>();
+    private List<MenuItem> menuItemsFragmentsVisitados = new ArrayList<>();
+    private static Boolean dobleClickSalir = false;
+    private Toast toastSalir;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +104,15 @@ public class MainActivity extends ActionBarActivity {
                         }
 
                         if (fragmentTransaction) {
+
+
+                            Fragment fragmentActual = null;
+                            if (getSupportFragmentManager().getFragments() != null && !getSupportFragmentManager().getFragments().isEmpty()) {
+                                fragmentActual = getSupportFragmentManager().getFragments().get(0);
+                                listaFragmentsVisitados.add(fragmentActual);
+                                menuItemsFragmentsVisitados.add(menuItem);
+                            }
+
                             getSupportFragmentManager().beginTransaction()
                                     .replace(R.id.content_frame, fragment)
                                     .commit();
@@ -110,8 +128,19 @@ public class MainActivity extends ActionBarActivity {
                 });
 
         this.setElementosPantallaUsuario();
+
+
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+/**
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content_frame, new AltaPacienteFragment())
+                .commit();*/
+    }
 
     private void setElementosPantallaUsuario() {
         TextView text = (TextView) findViewById(R.id.labelNombreUsuario);
@@ -158,9 +187,53 @@ public class MainActivity extends ActionBarActivity {
                 Intent intent_login = new Intent(this, LoginActivity.class);
                 startActivity(intent_login);
                 finish();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout layout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (layout.isDrawerOpen(GravityCompat.START)) {
+            layout.closeDrawer(GravityCompat.START);
+        } else {
+            if (listaFragmentsVisitados == null || listaFragmentsVisitados.isEmpty()) {
+
+                if (!dobleClickSalir) {
+                    toastSalir = Toast.makeText(this, "Vuelve a pulsar el botón atrás para salir", Toast.LENGTH_SHORT);
+                    toastSalir.setGravity(Gravity.CENTER, 0, 30);
+                    toastSalir.show();
+                    dobleClickSalir = true;
+                } else {
+                    dobleClickSalir = false;
+                    super.onBackPressed();
+                }
+            } else {
+
+                Fragment fragmentAVolver = listaFragmentsVisitados.get(listaFragmentsVisitados.size() - 1);
+                MenuItem menuItem = menuItemsFragmentsVisitados.get(menuItemsFragmentsVisitados.size() - 1);
+
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content_frame, fragmentAVolver)
+                        .commit();
+
+                menuItem.setChecked(true);
+                getSupportActionBar().setTitle(menuItem.getTitle());
+
+            }
+
+
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (toastSalir != null) {
+            toastSalir.cancel();
+        }
+        super.onDestroy();
     }
 
     private void deslogarUsuarioActual() {
@@ -182,8 +255,8 @@ public class MainActivity extends ActionBarActivity {
 
             db.getUsuariDao().update(usuari);
 
-        }catch (SQLException e) {
-            Log.e("ERROR EN LOGOUT: ","LOGOUT: ", e);
+        } catch (SQLException e) {
+            Log.e("ERROR EN LOGOUT: ", "LOGOUT: ", e);
         }
     }
 

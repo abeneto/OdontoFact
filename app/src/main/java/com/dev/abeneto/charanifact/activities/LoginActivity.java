@@ -25,7 +25,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.dev.abeneto.charanifact.R;
@@ -62,11 +61,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-
-    private static ImageButton buttonFlagVal;
-    private static ImageButton buttonFlagEs;
-
-    private static Locale localeSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,53 +121,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             finish();
         }
 
-        buttonFlagEs = (ImageButton) findViewById(R.id.imageFlagEs);
-        buttonFlagVal = (ImageButton) findViewById(R.id.imageFlagVal);
-
-        buttonFlagEs.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                buttonFlagVal.setImageResource(R.mipmap.flag_val_unsel);
-                buttonFlagEs.setImageResource(R.mipmap.flag_es);
-                changeLanguage(new Locale("es", "ES"));
-            }
-        });
-
-        buttonFlagVal.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                buttonFlagVal.setImageResource(R.mipmap.flag_val);
-                buttonFlagEs.setImageResource(R.mipmap.flag_es_unsel);
-                changeLanguage(new Locale("ca", "ES"));
-            }
-        });
-
-        if(localeSelected != null) {
-            if(localeSelected.getLanguage().equals("ca")) {
-                buttonFlagVal.setImageResource(R.mipmap.flag_val);
-                buttonFlagEs.setImageResource(R.mipmap.flag_es_unsel);
-            } else {
-                buttonFlagVal.setImageResource(R.mipmap.flag_val_unsel);
-                buttonFlagEs.setImageResource(R.mipmap.flag_es);
-            }
-        }
     }
-
-    private void changeLanguage(Locale locale) {
-        Resources res = getApplicationContext().getResources();
-        // Change locale settings in the app.
-        DisplayMetrics dm = res.getDisplayMetrics();
-        android.content.res.Configuration conf = res.getConfiguration();
-        conf.locale = locale;
-        res.updateConfiguration(conf, dm);
-        findViewById(R.id.email_login_form).invalidate();
-        Intent intent = getIntent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        localeSelected = locale;
-        finish();
-        startActivity(intent);
-    }
-
 
     private void populateAutoComplete() {
         getLoaderManager().initLoader(0, null, this);

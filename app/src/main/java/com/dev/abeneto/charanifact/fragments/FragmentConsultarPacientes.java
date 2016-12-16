@@ -94,18 +94,19 @@ public class FragmentConsultarPacientes extends Fragment {
 
         List<Pacient> listaAuxPacientes = null;
 
-        HashMap<String, Object> fields = new HashMap<String, Object>();
+        String apellido = null;
+        String numHistoria = null;
 
         if (editTextApellido.getText() != null && editTextApellido.getText().length() != 0) {
-            fields.put(FacturacioConstants.FIELD_PATIENT_COGNOM1, editTextApellido.getText());
+            apellido = editTextApellido.getText().toString();
         }
 
         if (editTextHistoria.getText() != null && editTextHistoria.getText().length() != 0) {
-            fields.put(FacturacioConstants.FIELD_PATIENT_NUMERO_HISTORIA, editTextHistoria.getText());
+            numHistoria = editTextHistoria.getText().toString();
         }
 
         try {
-            listaAuxPacientes = dbHelper.getPacientesByFields(fields);
+            listaAuxPacientes = dbHelper.buscarPacientesPorHistoriayApellido(apellido, numHistoria);
         } catch (SQLException e) {
             e.printStackTrace();
         }

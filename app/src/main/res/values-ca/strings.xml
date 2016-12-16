@@ -77,4 +77,5 @@
     <string name="total_factura_menos_siete_porciento">Total factura amb retenció ( 7% )</string>
     <string name="tratamiento_label">Tractament</string>
     <string name="usuario">Usuari</string>
+    <string name="apellido">Cognom</string>
 </resources>

@@ -92,5 +92,6 @@
     <string name="total_factura">Total factura</string>
     <string name="total_factura_menos_siete_porciento">Total factura con retención ( 7% )</string>
     <string name="action_logout">Cerrar sesión</string>
+    <string name="apellido">Apellido</string>
 
 </resources>
